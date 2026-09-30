@@ -1,33 +1,70 @@
-# Universal Workflow Agents
+# VXNT: Dedicated Workflow Agent & Skill System
 
-A model-agnostic, harness-agnostic suite of 9 specialized AI agents engineered for **Code**, **Design**, and **Writing** workflows.
+A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent) and 9 specialized skills prefixed with `vxnt:` across **Code**, **Design**, and **Writing**.
 
-These agents run natively in **Claude Code**, **Google Antigravity**, **Cursor**, **Windsurf**, or directly inside web chats and API wrappers (Claude, GPT-4o, Gemini, DeepSeek, Ollama).
+Runs natively in **Claude Code**, **Google Antigravity**, **Cursor**, **Windsurf**, or directly inside web chats and API wrappers (Claude, GPT-4o, Gemini, DeepSeek, Ollama).
 
 ---
 
-## 🧭 The 3x3 Agent Suite
+## 👑 The Dedicated Lead Agent: `VXNT`
 
-| Domain | Agent ID | Core Specialty | Key Lens |
+Instead of just a loose bag of tools, this system is anchored by a dedicated Lead Agent: [`agents/vxnt/SKILL.md`](file:///Users/visualnaut/sites/agents-model/agents/vxnt/SKILL.md) and governed by [`AGENTS.md`](file:///Users/visualnaut/sites/agents-model/AGENTS.md).
+
+- **Role:** Principal Architect, Design Director, and Chief Editor.
+- **Trigger:** `/vxnt`, `@vxnt`, or *"ask vxnt"*.
+- **Authority:** Evaluates the problem holistically, dynamically summons the 3 divisions, and executes the multi-agent Gauntlet recipes.
+
+```mermaid
+flowchart TD
+    User["User / Developer"] -->|"/vxnt <task or diff>"| VXNT[VXNT Lead Agent]
+    
+    subgraph Code Division
+        CR["vxnt:code-review"]
+        ADV["vxnt:adversarial"]
+        SMP["vxnt:simplifier"]
+    end
+    
+    subgraph Design Division
+        DC["vxnt:design-crit"]
+        DS["vxnt:design-system"]
+        EA["vxnt:empathy-a11y"]
+    end
+    
+    subgraph Writing Division
+        CE["vxnt:copy-editor"]
+        SS["vxnt:steelman-skeptic"]
+        NA["vxnt:narrative-architect"]
+    end
+    
+    VXNT --> Code Division
+    VXNT --> Design Division
+    VXNT --> Writing Division
+```
+
+---
+
+## 🧭 The 9 Linked Specialist Skills (`vxnt:*`)
+
+| Division | Skill ID & Spec Link | Role & Specialty | Key Lens |
 | :--- | :--- | :--- | :--- |
-| **Code** | [`code-review`](file:///Users/visualnaut/sites/agents-model/agents/code/code-review/SKILL.md) | Architecture & Quality Gatekeeper | Module depth, seams, cognitive load, error resilience |
-| **Code** | [`adversarial`](file:///Users/visualnaut/sites/agents-model/agents/code/adversarial/SKILL.md) | Doubt-Driven Red Teamer | Concurrency, race conditions, toxic inputs, failure cascades |
-| **Code** | [`simplifier`](file:///Users/visualnaut/sites/agents-model/agents/code/simplifier/SKILL.md) | YAGNI & Bloat Eliminator | Dead code, premature abstractions, native stdlib leverage |
-| **Design** | [`design-crit`](file:///Users/visualnaut/sites/agents-model/agents/design/design-crit/SKILL.md) | Visual & Interaction Critic | Visual hierarchy, 4px/8px rhythm, typography, affordances |
-| **Design** | [`design-system`](file:///Users/visualnaut/sites/agents-model/agents/design/design-system/SKILL.md) | Token & Component Hygiene Enforcer | Zero hardcoded values, component reusability, semantic HTML |
-| **Design** | [`empathy-a11y`](file:///Users/visualnaut/sites/agents-model/agents/design/empathy-a11y/SKILL.md) | Cognitive Strain & A11y Auditor | WCAG 2.2 AA/AAA, keyboard focus, screen readers, edge states |
-| **Writing** | [`copy-editor`](file:///Users/visualnaut/sites/agents-model/agents/writing/copy-editor/SKILL.md) | Ruthless Slop-Cutter & Stylist | Purges AI clichés, active verbs, dynamic cadence, 30%+ cut |
-| **Writing** | [`steelman-skeptic`](file:///Users/visualnaut/sites/agents-model/agents/writing/steelman-skeptic/SKILL.md) | Thesis Challenger & Logic Auditor | Exposes unstated assumptions, attacks weak logic, steelmans |
-| **Writing** | [`narrative-architect`](file:///Users/visualnaut/sites/agents-model/agents/writing/narrative-architect/SKILL.md) | Information Architect & Pacing Strategist | Outlines, cognitive progression (familiar -> novel), payoffs |
+| **Code** | [`vxnt:code-review`](file:///Users/visualnaut/sites/agents-model/agents/code/code-review/SKILL.md) | Architecture & Quality Gatekeeper | Module depth, seams, cognitive load, error resilience |
+| **Code** | [`vxnt:adversarial`](file:///Users/visualnaut/sites/agents-model/agents/code/adversarial/SKILL.md) | Doubt-Driven Red Teamer | Concurrency, race conditions, toxic inputs, failure cascades |
+| **Code** | [`vxnt:simplifier`](file:///Users/visualnaut/sites/agents-model/agents/code/simplifier/SKILL.md) | YAGNI & Bloat Eliminator | Dead code, premature abstractions, native stdlib leverage |
+| **Design** | [`vxnt:design-crit`](file:///Users/visualnaut/sites/agents-model/agents/design/design-crit/SKILL.md) | Visual & Interaction Critic | Visual hierarchy, 4px/8px rhythm, typography, affordances |
+| **Design** | [`vxnt:design-system`](file:///Users/visualnaut/sites/agents-model/agents/design/design-system/SKILL.md) | Token & Component Hygiene Enforcer | Zero hardcoded values, component reusability, semantic HTML |
+| **Design** | [`vxnt:empathy-a11y`](file:///Users/visualnaut/sites/agents-model/agents/design/empathy-a11y/SKILL.md) | Cognitive Strain & A11y Auditor | WCAG 2.2 AA/AAA, keyboard focus, screen readers, edge states |
+| **Writing** | [`vxnt:copy-editor`](file:///Users/visualnaut/sites/agents-model/agents/writing/copy-editor/SKILL.md) | Ruthless Slop-Cutter & Stylist | Purges AI clichés, active verbs, dynamic cadence, 30%+ cut |
+| **Writing** | [`vxnt:steelman-skeptic`](file:///Users/visualnaut/sites/agents-model/agents/writing/steelman-skeptic/SKILL.md) | Thesis Challenger & Logic Auditor | Exposes unstated assumptions, attacks weak logic, steelmans |
+| **Writing** | [`vxnt:narrative-architect`](file:///Users/visualnaut/sites/agents-model/agents/writing/narrative-architect/SKILL.md) | Information Architect & Pacing Strategist | Outlines, cognitive progression (familiar -> novel), payoffs |
 
 ---
 
 ## ⚡ Dual-Mode Execution
 
-Every agent supports two complementary operational modes:
+Every agent and skill supports two operational modes:
 
 ### 1. Fast Audit Mode (Default)
-Feed an artifact (diff, component code, PRD, or essay) to the agent. It immediately returns a standardized:
+Feed an artifact (diff, component code, PRD, or essay). It immediately returns:
 - **Executive Verdict** (`PASS`, `NEEDS_WORK`, or `REJECT`)
 - **Quality Scorecard Matrix** (1-5 ratings across 4 domain dimensions)
 - **Ranked Findings** (`BLOCKER`, `WARNING`, `NIT/POLISH`) with problem analysis and **concrete drop-in replacement diffs**
@@ -49,11 +86,11 @@ Triggered during exploratory phases (e.g., *"Spar with me on this architecture"*
 
 For comprehensive end-to-end evaluation, use the composite Gauntlet recipes:
 
-- [**Code Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/code-gauntlet.md): `code-review` ➔ `adversarial` ➔ `simplifier`  
+- [**Code Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/code-gauntlet.md): `vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier`  
   *Reviews seams, attacks edge cases, then strips defensive bloat.*
-- [**Design Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/design-gauntlet.md): `design-crit` ➔ `empathy-a11y` ➔ `design-system`  
+- [**Design Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/design-gauntlet.md): `vxnt:design-crit` ➔ `vxnt:empathy-a11y` ➔ `vxnt:design-system`  
   *Refines visual hierarchy, ensures accessibility/edge states, then normalizes tokens.*
-- [**Writing Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/writing-gauntlet.md): `narrative-architect` ➔ `copy-editor` ➔ `steelman-skeptic`  
+- [**Writing Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/writing-gauntlet.md): `vxnt:narrative-architect` ➔ `vxnt:copy-editor` ➔ `vxnt:steelman-skeptic`  
   *Structures narrative flow, cuts slop by 30%+, then pressure-tests the thesis.*
 
 ---
@@ -67,9 +104,9 @@ Use the included zero-dependency installer script to link or export agents:
 ./scripts/install.sh
 
 # Target specific harness:
-./scripts/install.sh --target antigravity   # Symlinks to ~/.gemini/config/skills/
-./scripts/install.sh --target claude        # Symlinks to ~/.claude/skills/
-./scripts/install.sh --target cursor        # Generates .cursor/rules/*.mdc
+./scripts/install.sh --target antigravity   # Symlinks vxnt and vxnt:* to ~/.gemini/config/skills/
+./scripts/install.sh --target claude        # Symlinks vxnt and vxnt:* to ~/.claude/skills/
+./scripts/install.sh --target cursor        # Generates .cursor/rules/vxnt*.mdc
 ./scripts/install.sh --target bundle        # Builds dist/all-agents-bundle.md
 ./scripts/install.sh --target all           # Installs across all supported harnesses
 
@@ -86,20 +123,22 @@ Run `./scripts/export-bundle.sh` to generate [`dist/all-agents-bundle.md`](file:
 
 ```
 agents-model/
-├── README.md                          # This documentation
-├── agents/                            # Canonical agent specifications
+├── README.md                          # Main documentation
+├── AGENTS.md                          # Universal agent configuration contract
+├── agents/
+│   ├── vxnt/SKILL.md                  # Dedicated VXNT Lead Agent
 │   ├── code/
-│   │   ├── code-review/SKILL.md
-│   │   ├── adversarial/SKILL.md
-│   │   └── simplifier/SKILL.md
+│   │   ├── code-review/SKILL.md       # vxnt:code-review
+│   │   ├── adversarial/SKILL.md       # vxnt:adversarial
+│   │   └── simplifier/SKILL.md        # vxnt:simplifier
 │   ├── design/
-│   │   ├── design-crit/SKILL.md
-│   │   ├── design-system/SKILL.md
-│   │   └── empathy-a11y/SKILL.md
+│   │   ├── design-crit/SKILL.md       # vxnt:design-crit
+│   │   ├── design-system/SKILL.md     # vxnt:design-system
+│   │   └── empathy-a11y/SKILL.md      # vxnt:empathy-a11y
 │   └── writing/
-│       ├── copy-editor/SKILL.md
-│       ├── steelman-skeptic/SKILL.md
-│       └── narrative-architect/SKILL.md
+│       ├── copy-editor/SKILL.md       # vxnt:copy-editor
+│       ├── steelman-skeptic/SKILL.md  # vxnt:steelman-skeptic
+│       └── narrative-architect/SKILL.md # vxnt:narrative-architect
 ├── recipes/                           # Multi-agent pipelines
 │   ├── code-gauntlet.md
 │   ├── design-gauntlet.md

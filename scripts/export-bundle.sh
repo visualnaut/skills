@@ -20,7 +20,17 @@ cat << 'EOF' > "${OUTPUT_FILE}"
 
 EOF
 
-echo "==> Bundling agents into ${OUTPUT_FILE}..."
+echo "==> Bundling dedicated agent and skills into ${OUTPUT_FILE}..."
+
+if [ -f "${ROOT_DIR}/agents/vxnt/SKILL.md" ]; then
+  echo "  -> Adding dedicated agent: vxnt..."
+  echo "## The Dedicated Lead Agent: VXNT" >> "${OUTPUT_FILE}"
+  echo "" >> "${OUTPUT_FILE}"
+  cat "${ROOT_DIR}/agents/vxnt/SKILL.md" >> "${OUTPUT_FILE}"
+  echo "" >> "${OUTPUT_FILE}"
+  echo "---" >> "${OUTPUT_FILE}"
+  echo "" >> "${OUTPUT_FILE}"
+fi
 
 for domain in code design writing; do
   domain_upper=$(echo "${domain}" | tr '[:lower:]' '[:upper:]')
