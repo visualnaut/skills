@@ -48,7 +48,17 @@ if [ -d "${ROOT_DIR}/.agents/agents" ]; then
   done
 fi
 
-for domain in code design writing; do
+if [ -f "${ROOT_DIR}/agents/CORE.md" ]; then
+  echo "  -> Adding Core Protocol: CORE.md..."
+  echo "## Universal Core Protocol & Output Schema" >> "${OUTPUT_FILE}"
+  echo "" >> "${OUTPUT_FILE}"
+  cat "${ROOT_DIR}/agents/CORE.md" >> "${OUTPUT_FILE}"
+  echo "" >> "${OUTPUT_FILE}"
+  echo "---" >> "${OUTPUT_FILE}"
+  echo "" >> "${OUTPUT_FILE}"
+fi
+
+for domain in code design writing efficiency; do
   domain_upper=$(echo "${domain}" | tr '[:lower:]' '[:upper:]')
   echo "## Domain: ${domain_upper}" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"

@@ -1,14 +1,14 @@
 # VXNT: Dedicated Workflow Agent & Skill System
 
-A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent) and 9 specialized skills prefixed with `vxnt:` across **Code**, **Design**, and **Writing**.
+A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent), 3 specialized **Division Subagents**, and 10 skills prefixed with `vxnt:` across **Code**, **Design**, **Writing**, and **Token Efficiency**.
 
-Runs natively in **Claude Code**, **Google Antigravity**, **Cursor**, **Windsurf**, or directly inside web chats and API wrappers (Claude, GPT-4o, Gemini, DeepSeek, Ollama).
+Runs natively in **Google Antigravity**, **Claude Code**, **Cursor**, **Windsurf**, or directly inside web chats and API wrappers (Claude, GPT-4o, Gemini, DeepSeek, Ollama).
 
 ---
 
 ## 👑 The Dedicated Lead Agent: `VXNT`
 
-Instead of just a loose bag of tools, this system is anchored by a dedicated Lead Agent: [`agents/vxnt/SKILL.md`](file:///Users/visualnaut/sites/agents-model/agents/vxnt/SKILL.md) and governed by [`AGENTS.md`](file:///Users/visualnaut/sites/agents-model/AGENTS.md).
+Instead of just a loose bag of tools, this system is anchored by a dedicated Lead Agent: [`agents/vxnt/SKILL.md`](file:///Users/visualnaut/sites/agents-model/agents/vxnt/SKILL.md) and governed by [`AGENTS.md`](file:///Users/visualnaut/sites/agents-model/AGENTS.md) and [`agents/CORE.md`](file:///Users/visualnaut/sites/agents-model/agents/CORE.md).
 
 - **Role:** Principal Architect, Design Director, and Chief Editor.
 - **Trigger:** `/vxnt`, `@vxnt`, or *"ask vxnt"*.
@@ -35,15 +35,35 @@ flowchart TD
         SS["vxnt:steelman-skeptic"]
         NA["vxnt:narrative-architect"]
     end
+
+    subgraph Cross-Division Governance
+        TE["vxnt:token-economist"]
+    end
     
     VXNT --> Code Division
     VXNT --> Design Division
     VXNT --> Writing Division
+    VXNT --> Cross-Division Governance
 ```
 
 ---
 
-## 🧭 The 9 Linked Specialist Skills (`vxnt:*`)
+## 🤖 The Division Subagents
+
+For task-specific delegation in harnesses that support subagents (e.g. Antigravity, Cursor):
+
+| Subagent ID | Focus Area | File Spec |
+| :--- | :--- | :--- |
+| **`vxnt-code`** | Code architecture, red-team hardening, and simplification | [`.agents/agents/vxnt-code.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt-code.md) |
+| **`vxnt-design`** | Visual hierarchy, WCAG 2.2 AA accessibility, and token enforcement | [`.agents/agents/vxnt-design.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt-design.md) |
+| **`vxnt-writing`** | Ruthless copy editing, argument steelmanning, and narrative outlines | [`.agents/agents/vxnt-writing.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt-writing.md) |
+| **`vxnt`** | Principal orchestrator coordinating all divisions | [`.agents/agents/vxnt.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt.md) |
+
+---
+
+## 🧭 The 10 Linked Specialist Skills (`vxnt:*`)
+
+All skills follow the lean standard defined in [`agents/CORE.md`](file:///Users/visualnaut/sites/agents-model/agents/CORE.md) (~50% leaner, zero duplicate boilerplate):
 
 | Division | Skill ID & Spec Link | Role & Specialty | Key Lens |
 | :--- | :--- | :--- | :--- |
@@ -56,6 +76,7 @@ flowchart TD
 | **Writing** | [`vxnt:copy-editor`](file:///Users/visualnaut/sites/agents-model/agents/writing/copy-editor/SKILL.md) | Ruthless Slop-Cutter & Stylist | Purges AI clichés, active verbs, dynamic cadence, 30%+ cut |
 | **Writing** | [`vxnt:steelman-skeptic`](file:///Users/visualnaut/sites/agents-model/agents/writing/steelman-skeptic/SKILL.md) | Thesis Challenger & Logic Auditor | Exposes unstated assumptions, attacks weak logic, steelmans |
 | **Writing** | [`vxnt:narrative-architect`](file:///Users/visualnaut/sites/agents-model/agents/writing/narrative-architect/SKILL.md) | Information Architect & Pacing Strategist | Outlines, cognitive progression (familiar -> novel), payoffs |
+| **Efficiency**| [`vxnt:token-economist`](file:///Users/visualnaut/sites/agents-model/agents/efficiency/token-economist/SKILL.md) | Cross-Division Token Governor | Prunes context noise, enforces terse diffs, aligns prompt cache |
 
 ---
 
@@ -72,13 +93,6 @@ Feed an artifact (diff, component code, PRD, or essay). It immediately returns:
 
 ### 2. Workshop Mode
 Triggered during exploratory phases (e.g., *"Spar with me on this architecture"* or *"Let's workshop this opening paragraph"*). The agent acts as a dialectic sparring partner, cross-examining your assumptions, exploring trade-offs, and co-refining the solution.
-
----
-
-## 🎯 Persona Calibration
-
-- **Default (`ruthless`):** Zero sycophancy. No empty praise (*"Great job!"*). Assumes the artifact has weaknesses and immediately identifies failure modes, unstated premises, or bloat.
-- **Draft Mode (`--gentle` or `mode: draft`):** Tolerates scaffolding and rough edges for early brainstorming while identifying structural dead ends.
 
 ---
 
@@ -104,9 +118,9 @@ Use the included zero-dependency installer script to link or export agents:
 ./scripts/install.sh
 
 # Target specific harness:
-./scripts/install.sh --target antigravity   # Symlinks vxnt and vxnt:* to ~/.gemini/config/skills/
-./scripts/install.sh --target claude        # Symlinks vxnt and vxnt:* to ~/.claude/skills/
-./scripts/install.sh --target cursor        # Generates .cursor/rules/vxnt*.mdc
+./scripts/install.sh --target antigravity   # Skills to ~/.gemini/config/skills/, subagents to ~/.gemini/config/agents/
+./scripts/install.sh --target claude        # Skills to ~/.claude/skills/ (subagents governed by AGENTS.md)
+./scripts/install.sh --target cursor        # Generates .cursor/rules/ (subagent personas @vxnt-* & skills)
 ./scripts/install.sh --target bundle        # Builds dist/all-agents-bundle.md
 ./scripts/install.sh --target all           # Installs across all supported harnesses
 
@@ -116,39 +130,6 @@ Use the included zero-dependency installer script to link or export agents:
 
 ### Using with Web LLMs (ChatGPT, Claude.ai, Gemini Studio, Ollama)
 Run `./scripts/export-bundle.sh` to generate [`dist/all-agents-bundle.md`](file:///Users/visualnaut/sites/agents-model/dist/all-agents-bundle.md). Copy and paste any agent's specification directly into your model's system prompt or chat session.
-
----
-
-## 📁 Repository Structure
-
-```
-agents-model/
-├── README.md                          # Main documentation
-├── AGENTS.md                          # Universal agent configuration contract
-├── agents/
-│   ├── vxnt/SKILL.md                  # Dedicated VXNT Lead Agent
-│   ├── code/
-│   │   ├── code-review/SKILL.md       # vxnt:code-review
-│   │   ├── adversarial/SKILL.md       # vxnt:adversarial
-│   │   └── simplifier/SKILL.md        # vxnt:simplifier
-│   ├── design/
-│   │   ├── design-crit/SKILL.md       # vxnt:design-crit
-│   │   ├── design-system/SKILL.md     # vxnt:design-system
-│   │   └── empathy-a11y/SKILL.md      # vxnt:empathy-a11y
-│   └── writing/
-│       ├── copy-editor/SKILL.md       # vxnt:copy-editor
-│       ├── steelman-skeptic/SKILL.md  # vxnt:steelman-skeptic
-│       └── narrative-architect/SKILL.md # vxnt:narrative-architect
-├── recipes/                           # Multi-agent pipelines
-│   ├── code-gauntlet.md
-│   ├── design-gauntlet.md
-│   └── writing-gauntlet.md
-├── scripts/
-│   ├── install.sh                     # Cross-harness installer/symlinker
-│   └── export-bundle.sh               # Single prompt library bundler
-└── dist/
-    └── all-agents-bundle.md           # Standalone copy-paste bundle
-```
 
 ---
 

@@ -21,6 +21,11 @@ flowchart LR
 
 ---
 
+## Token Efficiency Directive (`vxnt:token-economist`)
+> **Context Control:** Pass the document spine (H1/H2 outline) plus only the active section under review—do not pipe 10-page documents on initial structuring passes.
+
+---
+
 ## Step-by-Step Invocation Protocol
 
 ### Step 1: Structural & Narrative Blueprint

@@ -21,6 +21,11 @@ flowchart LR
 
 ---
 
+## Token Efficiency Directive (`vxnt:token-economist`)
+> **Context Control:** Between passes, pass ONLY the diff and bulleted blocker fixes—never repeat raw tool outputs, package files, or full unchanged files.
+
+---
+
 ## Step-by-Step Invocation Protocol
 
 ### Step 1: Run Architectural Review

@@ -21,6 +21,11 @@ flowchart LR
 
 ---
 
+## Token Efficiency Directive (`vxnt:token-economist`)
+> **Context Control:** Pass only the target component subtree and relevant Tailwind/CSS tokens—do not dump global stylesheets or unpruned parent pages.
+
+---
+
 ## Step-by-Step Invocation Protocol
 
 ### Step 1: Visual & Spatial Critique
