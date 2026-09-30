@@ -110,7 +110,7 @@ install_antigravity() {
   fi
 
   # Install prefixed skills
-  for domain in code design writing efficiency; do
+  for domain in code design writing efficiency build; do
     for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
       if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
         agent_name="$(basename "${agent_dir}")"
@@ -151,7 +151,7 @@ install_claude() {
   fi
 
   # Install prefixed skills
-  for domain in code design writing efficiency; do
+  for domain in code design writing efficiency build; do
     for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
       if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
         agent_name="$(basename "${agent_dir}")"
@@ -218,7 +218,7 @@ EOF
   fi
 
   # 3. Install prefixed skill rules (cross-platform safe hyphens)
-  for domain in code design writing efficiency; do
+  for domain in code design writing efficiency build; do
     for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
       if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
         agent_name="$(basename "${agent_dir}")"

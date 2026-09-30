@@ -1,6 +1,6 @@
 # VXNT: Dedicated Workflow Agent & Skill System
 
-A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent), 3 specialized **Division Subagents**, and 10 skills prefixed with `vxnt:` across **Code**, **Design**, **Writing**, and **Token Efficiency**.
+A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent), 4 specialized **Division Subagents**, and 15 skills prefixed with `vxnt:` across **Build**, **Code**, **Design**, **Writing**, and **Token Efficiency**.
 
 Runs natively in **Google Antigravity**, **Claude Code**, **Cursor**, **Windsurf**, or directly inside web chats and API wrappers (Claude, GPT-4o, Gemini, DeepSeek, Ollama).
 
@@ -10,14 +10,22 @@ Runs natively in **Google Antigravity**, **Claude Code**, **Cursor**, **Windsurf
 
 Instead of just a loose bag of tools, this system is anchored by a dedicated Lead Agent: [`agents/vxnt/SKILL.md`](file:///Users/visualnaut/sites/agents-model/agents/vxnt/SKILL.md) and governed by [`AGENTS.md`](file:///Users/visualnaut/sites/agents-model/AGENTS.md) and [`agents/CORE.md`](file:///Users/visualnaut/sites/agents-model/agents/CORE.md).
 
-- **Role:** Principal Architect, Design Director, and Chief Editor.
+- **Role:** Principal Architect, Design Director, Chief Editor, and Build Engine.
 - **Trigger:** `/vxnt`, `@vxnt`, or *"ask vxnt"*.
-- **Authority:** Evaluates the problem holistically, dynamically summons the 3 divisions, and executes the multi-agent Gauntlet recipes.
+- **Authority:** Evaluates the problem holistically, dynamically summons the 4 divisions, and executes the multi-agent Gauntlet & Build Pipeline recipes.
 
 ```mermaid
 flowchart TD
-    User["User / Developer"] -->|"/vxnt <task or diff>"| VXNT[VXNT Lead Agent]
+    User["User / Developer"] -->|"/vxnt <task, spec, or diff>"| VXNT[VXNT Lead Agent]
     
+    subgraph Build Division
+        GS["vxnt:grill-spec"]
+        DM["vxnt:domain-model"]
+        TG["vxnt:task-graph"]
+        IMP["vxnt:implement"]
+        HO["vxnt:handover"]
+    end
+
     subgraph Code Division
         CR["vxnt:code-review"]
         ADV["vxnt:adversarial"]
@@ -40,6 +48,7 @@ flowchart TD
         TE["vxnt:token-economist"]
     end
     
+    VXNT --> Build Division
     VXNT --> Code Division
     VXNT --> Design Division
     VXNT --> Writing Division
@@ -54,6 +63,7 @@ For task-specific delegation in harnesses that support subagents (e.g. Antigravi
 
 | Subagent ID | Focus Area | File Spec |
 | :--- | :--- | :--- |
+| **`vxnt-build`** | Requirements grilling, domain modeling, DAG task plans, dual-gate implementation, and handover | [`.agents/agents/vxnt-build.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt-build.md) |
 | **`vxnt-code`** | Code architecture, red-team hardening, and simplification | [`.agents/agents/vxnt-code.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt-code.md) |
 | **`vxnt-design`** | Visual hierarchy, WCAG 2.2 AA accessibility, and token enforcement | [`.agents/agents/vxnt-design.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt-design.md) |
 | **`vxnt-writing`** | Ruthless copy editing, argument steelmanning, and narrative outlines | [`.agents/agents/vxnt-writing.md`](file:///Users/visualnaut/sites/agents-model/.agents/agents/vxnt-writing.md) |
@@ -61,12 +71,17 @@ For task-specific delegation in harnesses that support subagents (e.g. Antigravi
 
 ---
 
-## 🧭 The 10 Linked Specialist Skills (`vxnt:*`)
+## 🧭 The 15 Linked Specialist Skills (`vxnt:*`)
 
 All skills follow the lean standard defined in [`agents/CORE.md`](file:///Users/visualnaut/sites/agents-model/agents/CORE.md) (~50% leaner, zero duplicate boilerplate):
 
 | Division | Skill ID & Spec Link | Role & Specialty | Key Lens |
 | :--- | :--- | :--- | :--- |
+| **Build** | [`vxnt:grill-spec`](file:///Users/visualnaut/sites/agents-model/agents/build/grill-spec/SKILL.md) | Requirement Inquisitor | Zero-tolerance interrogation, non-goals, failure states, RFCs |
+| **Build** | [`vxnt:domain-model`](file:///Users/visualnaut/sites/agents-model/agents/build/domain-model/SKILL.md) | Strategic DDD Modeler | Ubiquitous language, entities, value objects, invariants, states |
+| **Build** | [`vxnt:task-graph`](file:///Users/visualnaut/sites/agents-model/agents/build/task-graph/SKILL.md) | Transient DAG Decomposer | Vertical slices, `blocked_by` graphs, LOCAL/REMOTE tracking |
+| **Build** | [`vxnt:implement`](file:///Users/visualnaut/sites/agents-model/agents/build/implement/SKILL.md) | Incremental Craftsman | ACTIVE live surface gates vs AFK 3-strike circuit breaker |
+| **Build** | [`vxnt:handover`](file:///Users/visualnaut/sites/agents-model/agents/build/handover/SKILL.md) | Continuity Governor & Archiver | `.tasks/HANDOVER.md` checkpoints, master doc archival & cleanup |
 | **Code** | [`vxnt:code-review`](file:///Users/visualnaut/sites/agents-model/agents/code/code-review/SKILL.md) | Architecture & Quality Gatekeeper | Module depth, seams, cognitive load, error resilience |
 | **Code** | [`vxnt:adversarial`](file:///Users/visualnaut/sites/agents-model/agents/code/adversarial/SKILL.md) | Doubt-Driven Red Teamer | Concurrency, race conditions, toxic inputs, failure cascades |
 | **Code** | [`vxnt:simplifier`](file:///Users/visualnaut/sites/agents-model/agents/code/simplifier/SKILL.md) | YAGNI & Bloat Eliminator | Dead code, premature abstractions, native stdlib leverage |
@@ -84,33 +99,35 @@ All skills follow the lean standard defined in [`agents/CORE.md`](file:///Users/
 
 Every agent and skill supports two operational modes:
 
-### 1. Fast Audit Mode (Default)
-Feed an artifact (diff, component code, PRD, or essay). It immediately returns:
+### 1. Fast Audit / Active Mode (Default)
+Feed an artifact (diff, component code, PRD, or task). It immediately returns:
 - **Executive Verdict** (`PASS`, `NEEDS_WORK`, or `REJECT`)
-- **Quality Scorecard Matrix** (1-5 ratings across 4 domain dimensions)
+- **Quality Scorecard Matrix** (1-5 ratings across domain dimensions)
 - **Ranked Findings** (`BLOCKER`, `WARNING`, `NIT/POLISH`) with problem analysis and **concrete drop-in replacement diffs**
-- **Dialectic Probing Questions**
+- **Verification Runbook & Surface:** Concrete CLI command, URL, or curl snippet for live verification.
 
-### 2. Workshop Mode
-Triggered during exploratory phases (e.g., *"Spar with me on this architecture"* or *"Let's workshop this opening paragraph"*). The agent acts as a dialectic sparring partner, cross-examining your assumptions, exploring trade-offs, and co-refining the solution.
+### 2. Workshop / AFK Mode
+- **Workshop Mode:** Triggered during exploratory phases (e.g., *"Spar with me on this architecture"* or *"Let's workshop this opening paragraph"*). The agent acts as a dialectic sparring partner.
+- **AFK Mode (Autonomous Execution):** Executes DAG tasks autonomously with deterministic test verification and a strict 3-attempt circuit breaker before halting.
 
 ---
 
-## 🛡️ Multi-Agent Gauntlet Recipes
+## 🛡️ Multi-Agent Recipes & Pipelines
 
-Gauntlets are multi-pass validation pipelines that pass an artifact through three specialist lenses in sequence. Full recipes and single-prompt templates live in [`recipes/`](file:///Users/visualnaut/sites/agents-model/recipes/):
+Full recipes and single-prompt templates live in [`recipes/`](file:///Users/visualnaut/sites/agents-model/recipes/):
 
-| Gauntlet | Sequence & Recipe Link | Best For | Quick Trigger Example |
+| Recipe | Sequence & Recipe Link | Best For | Quick Trigger Example |
 | :--- | :--- | :--- | :--- |
-| **Code** | [`recipes/code-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/code-gauntlet.md)<br>`vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier` | Pull requests, critical backend modules, refactors | `/vxnt run code gauntlet on src/auth.ts`<br>*(or ask `vxnt-code`)* |
-| **Design** | [`recipes/design-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/design-gauntlet.md)<br>`vxnt:design-crit` ➔ `vxnt:empathy-a11y` ➔ `vxnt:design-system` | New UI components, modals, responsive screens | `/vxnt run design gauntlet on components/Modal.tsx`<br>*(or ask `vxnt-design`)* |
-| **Writing** | [`recipes/writing-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/writing-gauntlet.md)<br>`vxnt:narrative-architect` ➔ `vxnt:copy-editor` ➔ `vxnt:steelman-skeptic` | PRDs, RFCs, blog posts, strategic pitches | `/vxnt run writing gauntlet on docs/rfc.md`<br>*(or ask `vxnt-writing`)* |
+| **Build Pipeline** | [`recipes/build-pipeline.md`](file:///Users/visualnaut/sites/agents-model/recipes/build-pipeline.md)<br>`vxnt:grill-spec` ➔ `vxnt:domain-model` ➔ `vxnt:task-graph` ➔ `vxnt:implement` ➔ `vxnt:handover` | Product ideas, new features, and end-to-end implementations | `/vxnt run build pipeline on feature-idea`<br>*(or ask `vxnt-build`)* |
+| **Code Gauntlet** | [`recipes/code-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/code-gauntlet.md)<br>`vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier` | Pull requests, critical backend modules, refactors | `/vxnt run code gauntlet on src/auth.ts`<br>*(or ask `vxnt-code`)* |
+| **Design Gauntlet** | [`recipes/design-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/design-gauntlet.md)<br>`vxnt:design-crit` ➔ `vxnt:empathy-a11y` ➔ `vxnt:design-system` | New UI components, modals, responsive screens | `/vxnt run design gauntlet on components/Modal.tsx`<br>*(or ask `vxnt-design`)* |
+| **Writing Gauntlet** | [`recipes/writing-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/writing-gauntlet.md)<br>`vxnt:narrative-architect` ➔ `vxnt:copy-editor` ➔ `vxnt:steelman-skeptic` | PRDs, RFCs, blog posts, strategic pitches | `/vxnt run writing gauntlet on docs/rfc.md`<br>*(or ask `vxnt-writing`)* |
 
-### How to Run a Gauntlet:
-1. **Interactive Lead Agent:** Mention `/vxnt run the <code|design|writing> gauntlet on <target>`. VXNT will orchestrate the three passes and synthesize findings.
-2. **Dedicated Division Subagent:** Tell `vxnt-code`, `vxnt-design`, or `vxnt-writing` to run the gauntlet.
-3. **Step-by-Step Manual Execution:** Run the individual slash commands sequentially (e.g. `/vxnt:code-review` ➔ `/vxnt:adversarial` ➔ `/vxnt:simplifier`).
-4. **Single-Prompt Web LLMs:** Copy the pre-built `Automated Gauntlet Prompt` from the bottom of any recipe file into ChatGPT, Claude.ai, or Gemini Studio.
+### How to Run Recipes:
+1. **Interactive Lead Agent:** Mention `/vxnt run the <build|code|design|writing> pipeline on <target>`. VXNT will orchestrate the passes and synthesize findings.
+2. **Dedicated Division Subagent:** Tell `vxnt-build`, `vxnt-code`, `vxnt-design`, or `vxnt-writing` to run the recipe.
+3. **Step-by-Step Manual Execution:** Run the individual slash commands sequentially.
+4. **Single-Prompt Web LLMs:** Copy the pre-built `Automated Gauntlet / Pipeline Prompt` from the bottom of any recipe file into ChatGPT, Claude.ai, or Gemini Studio.
 
 ---
 

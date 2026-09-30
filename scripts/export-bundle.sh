@@ -58,7 +58,7 @@ if [ -f "${ROOT_DIR}/agents/CORE.md" ]; then
   echo "" >> "${OUTPUT_FILE}"
 fi
 
-for domain in code design writing efficiency; do
+for domain in code design writing build efficiency; do
   domain_upper=$(echo "${domain}" | tr '[:lower:]' '[:upper:]')
   echo "## Domain: ${domain_upper}" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
