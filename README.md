@@ -98,14 +98,19 @@ Triggered during exploratory phases (e.g., *"Spar with me on this architecture"*
 
 ## 🛡️ Multi-Agent Gauntlet Recipes
 
-For comprehensive end-to-end evaluation, use the composite Gauntlet recipes:
+Gauntlets are multi-pass validation pipelines that pass an artifact through three specialist lenses in sequence. Full recipes and single-prompt templates live in [`recipes/`](file:///Users/visualnaut/sites/agents-model/recipes/):
 
-- [**Code Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/code-gauntlet.md): `vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier`  
-  *Reviews seams, attacks edge cases, then strips defensive bloat.*
-- [**Design Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/design-gauntlet.md): `vxnt:design-crit` ➔ `vxnt:empathy-a11y` ➔ `vxnt:design-system`  
-  *Refines visual hierarchy, ensures accessibility/edge states, then normalizes tokens.*
-- [**Writing Gauntlet**](file:///Users/visualnaut/sites/agents-model/recipes/writing-gauntlet.md): `vxnt:narrative-architect` ➔ `vxnt:copy-editor` ➔ `vxnt:steelman-skeptic`  
-  *Structures narrative flow, cuts slop by 30%+, then pressure-tests the thesis.*
+| Gauntlet | Sequence & Recipe Link | Best For | Quick Trigger Example |
+| :--- | :--- | :--- | :--- |
+| **Code** | [`recipes/code-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/code-gauntlet.md)<br>`vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier` | Pull requests, critical backend modules, refactors | `/vxnt run code gauntlet on src/auth.ts`<br>*(or ask `vxnt-code`)* |
+| **Design** | [`recipes/design-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/design-gauntlet.md)<br>`vxnt:design-crit` ➔ `vxnt:empathy-a11y` ➔ `vxnt:design-system` | New UI components, modals, responsive screens | `/vxnt run design gauntlet on components/Modal.tsx`<br>*(or ask `vxnt-design`)* |
+| **Writing** | [`recipes/writing-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/writing-gauntlet.md)<br>`vxnt:narrative-architect` ➔ `vxnt:copy-editor` ➔ `vxnt:steelman-skeptic` | PRDs, RFCs, blog posts, strategic pitches | `/vxnt run writing gauntlet on docs/rfc.md`<br>*(or ask `vxnt-writing`)* |
+
+### How to Run a Gauntlet:
+1. **Interactive Lead Agent:** Mention `/vxnt run the <code|design|writing> gauntlet on <target>`. VXNT will orchestrate the three passes and synthesize findings.
+2. **Dedicated Division Subagent:** Tell `vxnt-code`, `vxnt-design`, or `vxnt-writing` to run the gauntlet.
+3. **Step-by-Step Manual Execution:** Run the individual slash commands sequentially (e.g. `/vxnt:code-review` ➔ `/vxnt:adversarial` ➔ `/vxnt:simplifier`).
+4. **Single-Prompt Web LLMs:** Copy the pre-built `Automated Gauntlet Prompt` from the bottom of any recipe file into ChatGPT, Claude.ai, or Gemini Studio.
 
 ---
 
