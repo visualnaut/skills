@@ -118,6 +118,19 @@ install_antigravity() {
       fi
     done
   done
+
+  # Install Antigravity Subagents (~/.gemini/config/agents/)
+  local antigrav_agents_dir="${HOME}/.gemini/config/agents"
+  mkdir -p "${antigrav_agents_dir}"
+  echo "==> Configuring Antigravity Subagents (~/.gemini/config/agents)..."
+  if [ -d "${ROOT_DIR}/.agents/agents" ]; then
+    for subagent_file in "${ROOT_DIR}/.agents/agents"/*.md; do
+      if [ -f "${subagent_file}" ]; then
+        local subagent_name="$(basename "${subagent_file}")"
+        link_or_copy "${subagent_file}" "${antigrav_agents_dir}/${subagent_name}"
+      fi
+    done
+  fi
 }
 
 install_claude() {
