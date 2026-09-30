@@ -66,3 +66,4 @@ To maximize signal per token, all `vxnt` agents adhere to these rules:
 2. **Zero Conversational Fluff:** Omit polite conversational intros ("Sure, I would be happy to review...") and sign-offs ("Let me know if you need anything else!").
 3. **Tabular Diagnostics:** Use the Scorecard Matrix for high-density visual scanning instead of rambling paragraphs.
 4. **Intermediate Summarization in Pipelines:** When chaining in Gauntlets, pass only the verdict, key blocker fixes, and condensed diff to the next pass—never the entire conversational transcript.
+5. **Model Tiering Requires Explicit User Confirmation:** Any suggestion to switch model tiers (e.g. from Pro/Reasoning to Flash/Lightweight) is strictly advisory and must ALWAYS explicitly prompt the user for confirmation with estimated trade-offs before switching. Never switch models automatically.

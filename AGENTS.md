@@ -28,7 +28,7 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 | **Writing** | [`vxnt:copy-editor`](file:///Users/visualnaut/sites/agents-model/agents/writing/copy-editor/SKILL.md) | Ruthless slop-cutter: deletes AI clichés ("delve", "tapestry"), tightens cadence, active voice. |
 | **Writing** | [`vxnt:steelman-skeptic`](file:///Users/visualnaut/sites/agents-model/agents/writing/steelman-skeptic/SKILL.md) | Devil's advocate: attacks weak logic, exposes unstated assumptions, steelmans counterarguments. |
 | **Writing** | [`vxnt:narrative-architect`](file:///Users/visualnaut/sites/agents-model/agents/writing/narrative-architect/SKILL.md) | Information architect: shapes outlines, pacing, cognitive flow (familiar -> novel), payoffs. |
-| **Efficiency**| [`vxnt:token-economist`](file:///Users/visualnaut/sites/agents-model/agents/efficiency/token-economist/SKILL.md) | Cross-division token governor: prunes context, enforces terse diffs, aligns prompt cache. |
+| **Efficiency**| [`vxnt:token-economist`](file:///Users/visualnaut/sites/agents-model/agents/efficiency/token-economist/SKILL.md) | Cross-division token governor: prunes context, enforces terse diffs, aligns prompt cache, advises model tiering (always requires user confirmation). |
 
 ---
 
