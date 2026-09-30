@@ -159,22 +159,27 @@ install_claude() {
       fi
     done
   done
+
+  # Subagent status note
+  echo "  [i] Note: Claude Code does not support background subagents. Task routing is governed by AGENTS.md / CLAUDE.md. Subagent daemon install skipped."
 }
 
 install_cursor() {
   echo "==> Configuring Cursor rules (${CURSOR_DIR})..."
   mkdir -p "${CURSOR_DIR}"
 
-  # Clean up legacy rules
+  # Clean up legacy rules (both unprefixed and colon-named)
   for legacy in code-review adversarial simplifier design-crit design-system empathy-a11y copy-editor steelman-skeptic narrative-architect; do
     rm -f "${CURSOR_DIR}/${legacy}.mdc"
   done
+  rm -f "${CURSOR_DIR}"/vxnt:*.mdc
 
-  # Install dedicated agent rule
+  # 1. Install dedicated Lead Agent rule
   if [ -d "${ROOT_DIR}/agents/vxnt" ] && [ -f "${ROOT_DIR}/agents/vxnt/SKILL.md" ]; then
     local dest_rule="${CURSOR_DIR}/vxnt.mdc"
     if [ "${UNINSTALL}" = true ]; then
       rm -f "${dest_rule}"
+      echo "  [x] Removed ${dest_rule}"
     else
       cat << EOF > "${dest_rule}"
 ---
@@ -188,12 +193,36 @@ EOF
     fi
   fi
 
-  # Install prefixed skill rules
+  # 2. Install Division Subagent rules (Cursor personas invokable via @vxnt-code, etc.)
+  if [ -d "${ROOT_DIR}/.agents/agents" ]; then
+    for subagent_file in "${ROOT_DIR}/.agents/agents"/vxnt-*.md; do
+      if [ -f "${subagent_file}" ]; then
+        local subagent_name="$(basename "${subagent_file}" .md)"
+        local dest_rule="${CURSOR_DIR}/${subagent_name}.mdc"
+        if [ "${UNINSTALL}" = true ]; then
+          rm -f "${dest_rule}"
+          echo "  [x] Removed ${dest_rule}"
+        else
+          cat << EOF > "${dest_rule}"
+---
+description: "VXNT Subagent Persona: @${subagent_name}"
+globs: *
+alwaysApply: false
+---
+EOF
+          cat "${subagent_file}" >> "${dest_rule}"
+          echo "  [✓] Generated: ${dest_rule}"
+        fi
+      fi
+    done
+  fi
+
+  # 3. Install prefixed skill rules (cross-platform safe hyphens)
   for domain in code design writing; do
     for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
       if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
         agent_name="$(basename "${agent_dir}")"
-        dest_rule="${CURSOR_DIR}/vxnt:${agent_name}.mdc"
+        dest_rule="${CURSOR_DIR}/vxnt-${agent_name}.mdc"
         if [ "${UNINSTALL}" = true ]; then
           rm -f "${dest_rule}"
           echo "  [x] Removed ${dest_rule}"

@@ -32,6 +32,22 @@ if [ -f "${ROOT_DIR}/agents/vxnt/SKILL.md" ]; then
   echo "" >> "${OUTPUT_FILE}"
 fi
 
+if [ -d "${ROOT_DIR}/.agents/agents" ]; then
+  echo "  -> Adding division subagents..."
+  echo "## The Division Subagents" >> "${OUTPUT_FILE}"
+  echo "" >> "${OUTPUT_FILE}"
+  for subagent_file in "${ROOT_DIR}/.agents/agents"/vxnt-*.md; do
+    if [ -f "${subagent_file}" ]; then
+      subagent_name="$(basename "${subagent_file}" .md)"
+      echo "     - ${subagent_name}..."
+      cat "${subagent_file}" >> "${OUTPUT_FILE}"
+      echo "" >> "${OUTPUT_FILE}"
+      echo "---" >> "${OUTPUT_FILE}"
+      echo "" >> "${OUTPUT_FILE}"
+    fi
+  done
+fi
+
 for domain in code design writing; do
   domain_upper=$(echo "${domain}" | tr '[:lower:]' '[:upper:]')
   echo "## Domain: ${domain_upper}" >> "${OUTPUT_FILE}"
