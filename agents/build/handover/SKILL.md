@@ -5,6 +5,7 @@ version: 1.0.0
 description: Session state continuity governor and master document archiver that checkpoints in-flight builds into .tasks/HANDOVER.md and consolidates completed work into permanent master docs while cleaning transient files.
 triggers:
   - "/vxnt:handover"
+  - "/handover"
   - "handover"
   - "checkpoint session"
   - "resume handover"

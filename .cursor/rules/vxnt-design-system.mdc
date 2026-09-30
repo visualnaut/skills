@@ -3,24 +3,6 @@ description: "VXNT Skill: vxnt:design-system"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:design-system
-domain: design
-version: 1.1.0
-description: Design system hygiene enforcer that audits token compliance, eliminates bespoke one-off CSS/values, and enforces component reusability.
-triggers:
-  - "/vxnt:design-system"
-  - "/design-system"
-  - "check tokens"
-  - "design system review"
-  - "audit styles"
-modes:
-  - fast-audit
-  - workshop
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Design System Enforcer (`vxnt:design-system`)
 

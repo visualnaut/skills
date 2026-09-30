@@ -5,6 +5,7 @@ version: 1.0.0
 description: Strategic Domain-Driven Design modeler that establishes ubiquitous language, entities, value objects, aggregate boundaries, and invariant state rules.
 triggers:
   - "/vxnt:domain-model"
+  - "/domain-model"
   - "domain model"
   - "define domain model"
   - "define invariants"

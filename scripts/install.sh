@@ -164,6 +164,11 @@ install_claude() {
   echo "  [i] Note: Claude Code does not support background subagents. Task routing is governed by AGENTS.md / CLAUDE.md. Subagent daemon install skipped."
 }
 
+strip_frontmatter() {
+  local file="$1"
+  awk 'BEGIN{n=0} /^---$/{n++; if(n<=2) next} {if(n>=2 || n==0) print}' "${file}"
+}
+
 install_cursor() {
   echo "==> Configuring Cursor rules (${CURSOR_DIR})..."
   mkdir -p "${CURSOR_DIR}"
@@ -188,7 +193,7 @@ globs: *
 alwaysApply: true
 ---
 EOF
-      cat "${ROOT_DIR}/agents/vxnt/SKILL.md" >> "${dest_rule}"
+      strip_frontmatter "${ROOT_DIR}/agents/vxnt/SKILL.md" >> "${dest_rule}"
       echo "  [✓] Generated: ${dest_rule}"
     fi
   fi
@@ -210,7 +215,7 @@ globs: *
 alwaysApply: false
 ---
 EOF
-          cat "${subagent_file}" >> "${dest_rule}"
+          strip_frontmatter "${subagent_file}" >> "${dest_rule}"
           echo "  [✓] Generated: ${dest_rule}"
         fi
       fi
@@ -234,7 +239,7 @@ globs: *
 alwaysApply: false
 ---
 EOF
-          cat "${agent_dir}/SKILL.md" >> "${dest_rule}"
+          strip_frontmatter "${agent_dir}/SKILL.md" >> "${dest_rule}"
           echo "  [✓] Generated: ${dest_rule}"
         fi
       fi

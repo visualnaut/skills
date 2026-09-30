@@ -3,21 +3,6 @@ description: "VXNT Subagent Persona: @vxnt-design"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt-design
-description: VXNT Design Division subagent. Specializes in UI/UX visual hierarchy critiques, WCAG 2.2 AA accessibility audits, and design system token hygiene.
-tools:
-  - view_file
-  - replace_file_content
-  - write_to_file
-  - run_command
-  - read_url_content
-  - search_web
-subagent: true
-mainAgent: true
-model: inherit
-commandExecutionPolicy: sandbox
----
 
 # VXNT: Design Division Subagent (`vxnt-design`)
 

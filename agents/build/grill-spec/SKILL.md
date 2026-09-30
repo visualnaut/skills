@@ -5,6 +5,7 @@ version: 1.0.0
 description: Zero-tolerance requirement inquisitor that interrogates product ideas, eliminates vagueness, forces trade-off decisions, and creates functional RFCs.
 triggers:
   - "/vxnt:grill-spec"
+  - "/grill-spec"
   - "grill spec"
   - "dissect requirements"
   - "grill requirements"

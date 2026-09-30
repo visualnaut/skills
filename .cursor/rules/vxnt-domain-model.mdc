@@ -3,24 +3,6 @@ description: "VXNT Skill: vxnt:domain-model"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:domain-model
-domain: build
-version: 1.0.0
-description: Strategic Domain-Driven Design modeler that establishes ubiquitous language, entities, value objects, aggregate boundaries, and invariant state rules.
-triggers:
-  - "/vxnt:domain-model"
-  - "domain model"
-  - "define domain model"
-  - "define invariants"
-  - "ubiquitous language"
-modes:
-  - model
-  - audit
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Domain Modeler (`vxnt:domain-model`)
 

@@ -3,24 +3,6 @@ description: "VXNT Skill: vxnt:task-graph"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:task-graph
-domain: build
-version: 1.0.0
-description: Transient DAG task breakdown engine with dependency resolution, parallel batch grouping, and dual tracking support (LOCAL markdown or REMOTE GitHub Issues).
-triggers:
-  - "/vxnt:task-graph"
-  - "break down tasks"
-  - "decompose tasks"
-  - "task graph"
-  - "generate task graph"
-modes:
-  - local
-  - remote
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Task Graph Decomposer (`vxnt:task-graph`)
 

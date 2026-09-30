@@ -3,21 +3,6 @@ description: "VXNT Subagent Persona: @vxnt-code"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt-code
-description: VXNT Code Division subagent. Specializes in senior architecture reviews, adversarial fault injection, concurrency race condition audits, and YAGNI simplification.
-tools:
-  - view_file
-  - replace_file_content
-  - write_to_file
-  - run_command
-  - read_url_content
-  - search_web
-subagent: true
-mainAgent: true
-model: inherit
-commandExecutionPolicy: sandbox
----
 
 # VXNT: Code Division Subagent (`vxnt-code`)
 

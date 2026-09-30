@@ -5,6 +5,7 @@ version: 1.0.0
 description: Incremental implementation engine with dual execution gates (ACTIVE human-in-the-loop with testable live surfaces vs AFK autonomous self-verification with a 3-attempt circuit breaker).
 triggers:
   - "/vxnt:implement"
+  - "/implement"
   - "implement task"
   - "build slice"
   - "execute task"

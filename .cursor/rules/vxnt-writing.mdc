@@ -3,21 +3,6 @@ description: "VXNT Subagent Persona: @vxnt-writing"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt-writing
-description: VXNT Writing Division subagent. Specializes in ruthless copy editing, AI slop removal, argument stress-testing (Steelman Skeptic), and narrative information architecture.
-tools:
-  - view_file
-  - replace_file_content
-  - write_to_file
-  - run_command
-  - read_url_content
-  - search_web
-subagent: true
-mainAgent: true
-model: inherit
-commandExecutionPolicy: sandbox
----
 
 # VXNT: Writing Division Subagent (`vxnt-writing`)
 

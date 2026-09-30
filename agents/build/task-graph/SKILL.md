@@ -5,6 +5,7 @@ version: 1.0.0
 description: Transient DAG task breakdown engine with dependency resolution, parallel batch grouping, and dual tracking support (LOCAL markdown or REMOTE GitHub Issues).
 triggers:
   - "/vxnt:task-graph"
+  - "/task-graph"
   - "break down tasks"
   - "decompose tasks"
   - "task graph"

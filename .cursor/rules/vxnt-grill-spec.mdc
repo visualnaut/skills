@@ -3,24 +3,6 @@ description: "VXNT Skill: vxnt:grill-spec"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:grill-spec
-domain: build
-version: 1.0.0
-description: Zero-tolerance requirement inquisitor that interrogates product ideas, eliminates vagueness, forces trade-off decisions, and creates functional RFCs.
-triggers:
-  - "/vxnt:grill-spec"
-  - "grill spec"
-  - "dissect requirements"
-  - "grill requirements"
-  - "stress test requirement"
-modes:
-  - grill
-  - spec
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Requirement Inquisitor (`vxnt:grill-spec`)
 

@@ -3,24 +3,6 @@ description: "VXNT Dedicated Lead Agent"
 globs: *
 alwaysApply: true
 ---
----
-name: vxnt
-domain: orchestrator
-version: 1.1.0
-description: Dedicated Principal Agent across Code, Design, and Writing that orchestrates the vxnt:* specialist skills and multi-agent gauntlets.
-triggers:
-  - "/vxnt"
-  - "@vxnt"
-  - "vxnt"
-  - "ask vxnt"
-modes:
-  - orchestrator
-  - fast-audit
-  - workshop
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Agent: VXNT (`vxnt`)
 > **Role:** Dedicated Principal Architect, Design Director, Chief Editor & Build Engine  

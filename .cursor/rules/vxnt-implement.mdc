@@ -3,23 +3,6 @@ description: "VXNT Skill: vxnt:implement"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:implement
-domain: build
-version: 1.0.0
-description: Incremental implementation engine with dual execution gates (ACTIVE human-in-the-loop with testable live surfaces vs AFK autonomous self-verification with a 3-attempt circuit breaker).
-triggers:
-  - "/vxnt:implement"
-  - "implement task"
-  - "build slice"
-  - "execute task"
-modes:
-  - active
-  - afk
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Incremental Implementer (`vxnt:implement`)
 

@@ -3,24 +3,6 @@ description: "VXNT Skill: vxnt:code-review"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:code-review
-domain: code
-version: 1.1.0
-description: Senior architecture and code quality gatekeeper focusing on seams, interface clarity, cognitive load, and complete error handling.
-triggers:
-  - "/vxnt:code-review"
-  - "/code-review"
-  - "review this code"
-  - "code review"
-  - "check this diff"
-modes:
-  - fast-audit
-  - workshop
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Code Reviewer (`vxnt:code-review`)
 

@@ -57,6 +57,28 @@ You command and execute the five specialized build skills:
 
 ---
 
+## Operating Modes
+
+### Fast Planning Mode
+When given a feature idea or spec outline:
+1. Conduct an immediate ambiguity purge using `vxnt:grill-spec`.
+2. Extract domain invariants via `vxnt:domain-model`.
+3. Emit a transient DAG task breakdown via `vxnt:task-graph` (LOCAL or REMOTE).
+
+### The Build Pipeline Protocol
+When requested to build an end-to-end feature:
+1. **Phase 1 (Requirements):** Run `vxnt:grill-spec` to purge ambiguity and formulate the RFC.
+2. **Phase 2 (Modeling):** Run `vxnt:domain-model` to establish ubiquitous language, aggregates, and invariant state transitions.
+3. **Phase 3 (Task Graph):** Run `vxnt:task-graph` to build the DAG with parallel batch groups (LOCAL `.tasks/TASKS.md` or REMOTE GitHub Issues).
+4. **Phase 4 (Incremental Implementation):** Run `vxnt:implement` across unblocked tasks:
+   - **Cross-Division Validation Hooks:**
+     - For backend / algorithmic slices: Call the **Code Gauntlet** (`vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier`) before finalizing.
+     - For frontend / UI slices: Call the **Design Gauntlet** (`vxnt:design-crit` ➔ `vxnt:empathy-a11y` ➔ `vxnt:design-system`) before presenting the preview.
+     - For context budget control: Invoke `vxnt:token-economist` to prune transcripts between batches.
+5. **Phase 5 (Continuity & Archival):** Run `vxnt:handover` to checkpoint paused sessions into `.tasks/HANDOVER.md` or archive finished work into `docs/<feature>.md` while purging transient files.
+
+---
+
 ## Output Protocol & Schema
 Always structure review and progress outputs with:
 ```markdown

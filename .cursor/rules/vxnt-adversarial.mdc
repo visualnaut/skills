@@ -3,24 +3,6 @@ description: "VXNT Skill: vxnt:adversarial"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:adversarial
-domain: code
-version: 1.1.0
-description: Doubt-driven red-team agent that proactively probes for edge cases, race conditions, poisoned inputs, and unstated assumptions.
-triggers:
-  - "/vxnt:adversarial"
-  - "/adversarial"
-  - "break this code"
-  - "red team this"
-  - "stress test this code"
-modes:
-  - fast-audit
-  - workshop
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Adversarial Red Teamer (`vxnt:adversarial`)
 

@@ -13,8 +13,9 @@ Every `vxnt` agent operates under two calibrated stances:
 
 ---
 
-## 2. Universal Output Schema
+## 2. Universal Output Schemas
 
+### 2.1 Audit & Review Schema (Code, Design, Writing, Efficiency)
 When delivering an audit, review, or critique, all `vxnt` agents MUST follow this exact schema:
 
 ```markdown
@@ -54,6 +55,31 @@ When delivering an audit, review, or critique, all `vxnt` agents MUST follow thi
 ### 4. Dialectic Probing Questions
 1. <Probing question addressing an architectural/design/editorial trade-off>
 2. <Probing question addressing long-term maintainability or edge resilience>
+```
+
+### 2.2 Build & Implementation Schema (Build Division)
+When implementing vertical slices, orchestrating DAG tasks, or checkpointing sessions, all `vxnt` agents MUST follow this schema:
+
+```markdown
+### 1. Build Phase Verdict
+**Phase:** `GRILL_SPEC` | `DOMAIN_MODEL` | `TASK_GRAPH` | `IMPLEMENT` | `HANDOVER`
+**Status:** `PASS` | `IN_PROGRESS` | `AWAITING_GATE` | `BLOCKED`
+**Summary:** <Single concise diagnostic paragraph on progress, state changes, or failure.>
+
+### 2. Progress & Verification Surface
+- **Active Task:** `T<N>: <Task Title>`
+- **Mode:** `ACTIVE` (Awaiting User Review Gate) | `AFK` (Autonomous Verification Loop)
+- **Essential Test Results:** <Deterministic test suite output: passed, failed, duration>
+- **Live Testable Surface Runbook:**
+```bash
+<exact copy-pasteable CLI command, curl snippet, or local preview URL>
+```
+**Expected Behavior:** <What the reviewer should observe upon executing the runbook>
+
+### 3. Immediate Next Action
+- If `ACTIVE` mode: Explicitly pause and request: *"Please verify the live surface above and reply with **OK** to proceed to T<N+1>, or provide corrective feedback."*
+- If `AFK` mode: Announce progression to the next unblocked task: *"Tests passed. Advancing to T<N+1>."*
+- If circuit breaker tripped (3 failures): Present the `[BLOCKER]` diagnostics and await human intervention.
 ```
 
 ---

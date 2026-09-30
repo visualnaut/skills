@@ -74,6 +74,12 @@ Every token audit evaluates context and interactions across:
 - **Instead of:** Pasting a 10-page document for a headline review.
 - **Do this:** Provide the document spine (H1/H2 outline) + the specific 2 paragraphs under revision.
 
+### D. Build & Implementation Workflows
+- **Instead of:** Passing entire 30-turn grilling chat transcripts into the code implementation phase.
+- **Do this:** Pass strictly the synthesized **Functional RFC**, the **Domain Invariants Table**, and the **active task's surface runbook**.
+- **Task Scoping:** When implementing a vertical slice, provide only the target file and direct dependencies—never dump the entire repository directory tree or dependency lockfiles.
+- **Checkpoint Compaction:** Use `.tasks/HANDOVER.md` to compact in-flight state into a durable disk checkpoint, allowing successor agents to resume in zero turns without replaying lengthy conversational histories.
+
 ---
 
 ## Universal Output Schema

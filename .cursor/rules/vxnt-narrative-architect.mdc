@@ -3,25 +3,6 @@ description: "VXNT Skill: vxnt:narrative-architect"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:narrative-architect
-domain: writing
-version: 1.1.0
-description: Information architect and narrative strategist that designs doc outlines, cognitive progression, pacing, and compelling reader payoffs.
-triggers:
-  - "/vxnt:narrative-architect"
-  - "/narrative-architect"
-  - "structure this document"
-  - "outline this"
-  - "narrative review"
-  - "fix pacing"
-modes:
-  - fast-audit
-  - workshop
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Narrative Architect (`vxnt:narrative-architect`)
 

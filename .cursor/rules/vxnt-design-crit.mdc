@@ -3,24 +3,6 @@ description: "VXNT Skill: vxnt:design-crit"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:design-crit
-domain: design
-version: 1.1.0
-description: Visual hierarchy, spatial rhythm, and interaction critic that audits interfaces for cognitive clarity, affordance strength, and typography elegance.
-triggers:
-  - "/vxnt:design-crit"
-  - "/design-crit"
-  - "critique this design"
-  - "ui review"
-  - "design critique"
-modes:
-  - fast-audit
-  - workshop
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Visual Design Critic (`vxnt:design-crit`)
 

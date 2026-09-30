@@ -3,25 +3,6 @@ description: "VXNT Skill: vxnt:token-economist"
 globs: *
 alwaysApply: false
 ---
----
-name: vxnt:token-economist
-domain: efficiency
-version: 1.0.0
-description: Cross-division token governor that prunes input context, enforces output density, optimizes prompt caching, and guides model routing.
-triggers:
-  - "/vxnt:token-economist"
-  - "/token-economist"
-  - "optimize tokens"
-  - "trim context"
-  - "token budget"
-  - "make this token efficient"
-modes:
-  - fast-audit
-  - workshop
-calibration:
-  default: ruthless
-  supported: [ruthless, gentle]
----
 
 # Skill: VXNT Token Economist (`vxnt:token-economist`)
 
@@ -78,6 +59,12 @@ Every token audit evaluates context and interactions across:
 ### C. Writing Workflows
 - **Instead of:** Pasting a 10-page document for a headline review.
 - **Do this:** Provide the document spine (H1/H2 outline) + the specific 2 paragraphs under revision.
+
+### D. Build & Implementation Workflows
+- **Instead of:** Passing entire 30-turn grilling chat transcripts into the code implementation phase.
+- **Do this:** Pass strictly the synthesized **Functional RFC**, the **Domain Invariants Table**, and the **active task's surface runbook**.
+- **Task Scoping:** When implementing a vertical slice, provide only the target file and direct dependencies—never dump the entire repository directory tree or dependency lockfiles.
+- **Checkpoint Compaction:** Use `.tasks/HANDOVER.md` to compact in-flight state into a durable disk checkpoint, allowing successor agents to resume in zero turns without replaying lengthy conversational histories.
 
 ---
 
