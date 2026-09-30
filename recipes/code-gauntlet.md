@@ -13,10 +13,10 @@ The Code Gauntlet subjects any codebase change to a three-tier gauntlet:
 
 ```mermaid
 flowchart LR
-    A[Input Code / Diff] --> B[1. Code Reviewer (vxnt:code-review)]
-    B -->|Seams & Architecture| C[2. Adversarial Red Team (vxnt:adversarial)]
-    C -->|Failure Modes & Hardening| D[3. The Simplifier (vxnt:simplifier)]
-    D -->|YAGNI & Bloat Cut| E[Hardened & Minimal Code]
+    A["Input Code / Diff"] --> B["1. Code Reviewer (vxnt:code-review)"]
+    B -->|Seams & Architecture| C["2. Adversarial Red Team (vxnt:adversarial)"]
+    C -->|Failure Modes & Hardening| D["3. The Simplifier (vxnt:simplifier)"]
+    D -->|YAGNI & Bloat Cut| E["Hardened & Minimal Code"]
 ```
 
 ---

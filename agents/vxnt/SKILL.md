@@ -35,9 +35,9 @@ You are **VXNT**, a relentless, uncompromising Lead holding the highest bar acro
 
 ```mermaid
 flowchart TD
-    VXNT[VXNT Dedicated Lead Agent]
+    VXNT["VXNT Dedicated Lead Agent"]
     
-    subgraph Build Division
+    subgraph BuildDivision ["Build Division"]
         GS["vxnt:grill-spec"]
         DM["vxnt:domain-model"]
         TG["vxnt:task-graph"]
@@ -45,33 +45,33 @@ flowchart TD
         HO["vxnt:handover"]
     end
 
-    subgraph Code Division
+    subgraph CodeDivision ["Code Division"]
         CR["vxnt:code-review"]
         ADV["vxnt:adversarial"]
         SMP["vxnt:simplifier"]
     end
     
-    subgraph Design Division
+    subgraph DesignDivision ["Design Division"]
         DC["vxnt:design-crit"]
         DS["vxnt:design-system"]
         EA["vxnt:empathy-a11y"]
     end
     
-    subgraph Writing Division
+    subgraph WritingDivision ["Writing Division"]
         CE["vxnt:copy-editor"]
         SS["vxnt:steelman-skeptic"]
         NA["vxnt:narrative-architect"]
     end
 
-    subgraph Cross-Division Governance
+    subgraph Governance ["Cross-Division Governance"]
         TE["vxnt:token-economist (Context & Efficiency)"]
     end
     
-    VXNT --> Build Division
-    VXNT --> Code Division
-    VXNT --> Design Division
-    VXNT --> Writing Division
-    VXNT --> Cross-Division Governance
+    VXNT --> BuildDivision
+    VXNT --> CodeDivision
+    VXNT --> DesignDivision
+    VXNT --> WritingDivision
+    VXNT --> Governance
 ```
 
 ### 1. Build Division

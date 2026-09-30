@@ -13,10 +13,10 @@ The Design Gauntlet transforms rough or unrefined UI into production-grade, acce
 
 ```mermaid
 flowchart LR
-    A[Input UI / Markup] --> B[1. Design Critic (vxnt:design-crit)]
-    B -->|Visual Hierarchy & Rhythm| C[2. Empathy & A11y (vxnt:empathy-a11y)]
-    C -->|WCAG & Edge States| D[3. Design System (vxnt:design-system)]
-    D -->|Tokens & Reusable Primitives| E[Production-Ready UI]
+    A["Input UI / Markup"] --> B["1. Design Critic (vxnt:design-crit)"]
+    B -->|Visual Hierarchy & Rhythm| C["2. Empathy & A11y (vxnt:empathy-a11y)"]
+    C -->|WCAG & Edge States| D["3. Design System (vxnt:design-system)"]
+    D -->|Tokens & Reusable Primitives| E["Production-Ready UI"]
 ```
 
 ---

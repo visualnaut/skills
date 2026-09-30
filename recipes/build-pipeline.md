@@ -15,7 +15,7 @@ flowchart TD
     Idea["1. Raw Feature Idea / Requirements"] --> GS["Phase 1: Ambiguity Purge (vxnt:grill-spec)"]
     GS -->|Hardened RFC| DM["Phase 2: Domain Modeling (vxnt:domain-model)"]
     DM -->|Ubiquitous Language & Invariants| TG["Phase 3: Transient DAG Decomposition (vxnt:task-graph)"]
-    TG -->|LOCAL (.tasks/TASKS.md) or REMOTE (GitHub Issues)| IMP["Phase 4: Incremental Slices (vxnt:implement)"]
+    TG -->|LOCAL TASKS.md or REMOTE GitHub Issues| IMP["Phase 4: Incremental Slices (vxnt:implement)"]
     
     subgraph ParallelExecution ["Subagent Parallelism"]
         IMP -->|Unblocked Batch| S1["Subagent A: Task 1"]
@@ -25,7 +25,7 @@ flowchart TD
     S1 --> Gate{"Execution Mode Gate"}
     S2 --> Gate
     
-    Gate -->|ACTIVE| UserGate["Agent Tests + Live Surface -> User Sign-Off"]
+    Gate -->|ACTIVE| UserGate["Agent Tests + Live Surface to User Sign-Off"]
     Gate -->|AFK| AutoGate["Automated Tests + 3-Attempt Circuit Breaker"]
     
     UserGate --> HO["Phase 5: Continuity & Archival (vxnt:handover)"]

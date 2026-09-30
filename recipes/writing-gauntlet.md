@@ -13,10 +13,10 @@ The Writing Gauntlet elevates technical and strategic writing from rough thought
 
 ```mermaid
 flowchart LR
-    A[Input Draft / Idea] --> B[1. Narrative Architect (vxnt:narrative-architect)]
-    B -->|Structure, Arc & Hook| C[2. Ruthless Copy Editor (vxnt:copy-editor)]
-    C -->|Slop Purge & Cadence| D[3. Steelman Skeptic (vxnt:steelman-skeptic)]
-    D -->|Counter-Thesis & Hardening| E[Battle-Hardened Document]
+    A["Input Draft / Idea"] --> B["1. Narrative Architect (vxnt:narrative-architect)"]
+    B -->|Structure, Arc & Hook| C["2. Ruthless Copy Editor (vxnt:copy-editor)"]
+    C -->|Slop Purge & Cadence| D["3. Steelman Skeptic (vxnt:steelman-skeptic)"]
+    D -->|Counter-Thesis & Hardening| E["Battle-Hardened Document"]
 ```
 
 ---
