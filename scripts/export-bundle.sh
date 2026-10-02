@@ -22,11 +22,11 @@ EOF
 
 echo "==> Bundling dedicated agent and skills into ${OUTPUT_FILE}..."
 
-if [ -f "${ROOT_DIR}/agents/vxnt/SKILL.md" ]; then
+if [ -f "${ROOT_DIR}/skills/vxnt/SKILL.md" ]; then
   echo "  -> Adding dedicated agent: vxnt..."
   echo "## The Dedicated Lead Agent: VXNT" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
-  cat "${ROOT_DIR}/agents/vxnt/SKILL.md" >> "${OUTPUT_FILE}"
+  cat "${ROOT_DIR}/skills/vxnt/SKILL.md" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
   echo "---" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
@@ -48,28 +48,28 @@ if [ -d "${ROOT_DIR}/.agents/agents" ]; then
   done
 fi
 
-if [ -f "${ROOT_DIR}/agents/CORE.md" ]; then
+if [ -f "${ROOT_DIR}/CORE.md" ]; then
   echo "  -> Adding Core Protocol: CORE.md..."
   echo "## Universal Core Protocol & Output Schema" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
-  cat "${ROOT_DIR}/agents/CORE.md" >> "${OUTPUT_FILE}"
+  cat "${ROOT_DIR}/CORE.md" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
   echo "---" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
 fi
 
-for domain in code design writing build efficiency; do
+for domain in build code design writing efficiency; do
   domain_upper=$(echo "${domain}" | tr '[:lower:]' '[:upper:]')
   echo "## Domain: ${domain_upper}" >> "${OUTPUT_FILE}"
   echo "" >> "${OUTPUT_FILE}"
 
-  for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
-    if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
-      agent_name="$(basename "${agent_dir}")"
-      echo "  -> Adding ${agent_name}..."
+  for skill_dir in "${ROOT_DIR}/skills/vxnt:${domain}:"*; do
+    if [ -d "${skill_dir}" ] && [ -f "${skill_dir}/SKILL.md" ]; then
+      skill_name="$(basename "${skill_dir}")"
+      echo "  -> Adding ${skill_name}..."
       echo "---" >> "${OUTPUT_FILE}"
       echo "" >> "${OUTPUT_FILE}"
-      cat "${agent_dir}/SKILL.md" >> "${OUTPUT_FILE}"
+      cat "${skill_dir}/SKILL.md" >> "${OUTPUT_FILE}"
       echo "" >> "${OUTPUT_FILE}"
       echo "" >> "${OUTPUT_FILE}"
     fi

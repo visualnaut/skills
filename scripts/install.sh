@@ -11,9 +11,15 @@ USE_SYMLINK=true
 UNINSTALL=false
 TARGET=""
 
-ANTIGRAV_DIR="${HOME}/.gemini/config/skills"
+ANTIGRAV_PLUGIN_DIR="${HOME}/.gemini/config/plugins/vxnt"
+ANTIGRAV_SKILLS_DIR="${HOME}/.gemini/config/skills"
+ANTIGRAV_AGENTS_DIR="${HOME}/.gemini/config/agents"
 CLAUDE_DIR="${HOME}/.claude/skills"
-CURSOR_DIR="${PWD}/.cursor/rules"
+if [[ "${PWD}" == "${ROOT_DIR}"* ]]; then
+  CURSOR_DIR="${ROOT_DIR}/.cursor/rules"
+else
+  CURSOR_DIR="${PWD}/.cursor/rules"
+fi
 
 usage() {
   cat << EOF
@@ -21,7 +27,7 @@ Usage: $(basename "$0") [OPTIONS]
 
 Options:
   -t, --target <harness>    Target harness to install agents to:
-                            antigravity  (Installs into ~/.gemini/config/skills)
+                            antigravity  (Installs plugin into ~/.gemini/config/plugins/vxnt)
                             claude       (Installs into ~/.claude/skills)
                             cursor       (Installs into ./.cursor/rules in current repo)
                             bundle       (Builds dist/all-agents-bundle.md)
@@ -93,41 +99,55 @@ link_or_copy() {
 }
 
 install_antigravity() {
-  echo "==> Configuring Antigravity (~/.gemini/config/skills)..."
-  mkdir -p "${ANTIGRAV_DIR}"
+  echo "==> Configuring Antigravity Plugin (~/.gemini/config/plugins/vxnt)..."
+  mkdir -p "$(dirname "${ANTIGRAV_PLUGIN_DIR}")"
+  mkdir -p "${ANTIGRAV_AGENTS_DIR}"
 
-  # Clean up legacy unprefixed symlinks if present
-  for legacy in code-review adversarial simplifier design-crit design-system empathy-a11y copy-editor steelman-skeptic narrative-architect; do
-    if [ -L "${ANTIGRAV_DIR}/${legacy}" ]; then
-      rm -f "${ANTIGRAV_DIR}/${legacy}"
+  # Clean up legacy loose symlinks in ~/.gemini/config/skills/ if present
+  if [ -d "${ANTIGRAV_SKILLS_DIR}" ]; then
+    for legacy in code-review adversarial simplifier design-crit design-system empathy-a11y copy-editor steelman-skeptic narrative-architect grill-spec domain-model task-graph implement handover token-economist; do
+      rm -rf "${ANTIGRAV_SKILLS_DIR}/${legacy}"
+    done
+    for link in "${ANTIGRAV_SKILLS_DIR}"/vxnt*; do
+      if [ -L "${link}" ] || [ -e "${link}" ]; then
+        rm -rf "${link}"
+      fi
+    done
+  fi
+
+  # Clean up stale symlinks in ~/.gemini/config/agents/ pointing to old folders
+  for link in "${ANTIGRAV_AGENTS_DIR}"/vxnt*; do
+    if [ -L "${link}" ]; then
+      target="$(readlink "${link}" 2>/dev/null || true)"
+      if [[ "${target}" == *"agents-model"* ]] || [ ! -e "${link}" ]; then
+        rm -f "${link}"
+      fi
     fi
   done
 
-  # Install dedicated VXNT Lead Agent
-  if [ -d "${ROOT_DIR}/agents/vxnt" ]; then
-    echo "  -> Configuring dedicated agent: vxnt..."
-    link_or_copy "${ROOT_DIR}/agents/vxnt" "${ANTIGRAV_DIR}/vxnt"
-  fi
-
-  # Install prefixed skills
-  for domain in code design writing efficiency build; do
-    for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
-      if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
-        agent_name="$(basename "${agent_dir}")"
-        link_or_copy "${agent_dir}" "${ANTIGRAV_DIR}/vxnt:${agent_name}"
+  # Plugin install or uninstall
+  if [ "${UNINSTALL}" = true ]; then
+    echo "  [x] Removing plugin ${ANTIGRAV_PLUGIN_DIR}"
+    rm -rf "${ANTIGRAV_PLUGIN_DIR}"
+    for subagent_file in "${ROOT_DIR}/.agents/agents"/*.md; do
+      if [ -f "${subagent_file}" ]; then
+        local subagent_name="$(basename "${subagent_file}")"
+        rm -f "${ANTIGRAV_AGENTS_DIR}/${subagent_name}"
       fi
     done
-  done
+    return 0
+  fi
 
-  # Install Antigravity Subagents (~/.gemini/config/agents/)
-  local antigrav_agents_dir="${HOME}/.gemini/config/agents"
-  mkdir -p "${antigrav_agents_dir}"
+  # Install whole repo as plugin
+  link_or_copy "${ROOT_DIR}" "${ANTIGRAV_PLUGIN_DIR}"
+
+  # Link division subagents into ~/.gemini/config/agents/
   echo "==> Configuring Antigravity Subagents (~/.gemini/config/agents)..."
   if [ -d "${ROOT_DIR}/.agents/agents" ]; then
     for subagent_file in "${ROOT_DIR}/.agents/agents"/*.md; do
       if [ -f "${subagent_file}" ]; then
         local subagent_name="$(basename "${subagent_file}")"
-        link_or_copy "${subagent_file}" "${antigrav_agents_dir}/${subagent_name}"
+        link_or_copy "${subagent_file}" "${ANTIGRAV_AGENTS_DIR}/${subagent_name}"
       fi
     done
   fi
@@ -138,30 +158,41 @@ install_claude() {
   mkdir -p "${CLAUDE_DIR}"
 
   # Clean up legacy unprefixed symlinks if present
-  for legacy in code-review adversarial simplifier design-crit design-system empathy-a11y copy-editor steelman-skeptic narrative-architect; do
-    if [ -L "${CLAUDE_DIR}/${legacy}" ]; then
-      rm -f "${CLAUDE_DIR}/${legacy}"
+  for legacy in code-review adversarial simplifier design-crit design-system empathy-a11y copy-editor steelman-skeptic narrative-architect grill-spec domain-model task-graph implement handover token-economist; do
+    rm -rf "${CLAUDE_DIR}/${legacy}"
+  done
+
+  # Clean up stale symlinks pointing to old agents-model folder or broken links
+  for link in "${CLAUDE_DIR}"/vxnt*; do
+    if [ -L "${link}" ]; then
+      target="$(readlink "${link}" 2>/dev/null || true)"
+      if [[ "${target}" == *"agents-model"* ]] || [ ! -e "${link}" ]; then
+        rm -rf "${link}"
+      fi
     fi
   done
 
-  # Install dedicated VXNT Lead Agent
-  if [ -d "${ROOT_DIR}/agents/vxnt" ]; then
-    echo "  -> Configuring dedicated agent: vxnt..."
-    link_or_copy "${ROOT_DIR}/agents/vxnt" "${CLAUDE_DIR}/vxnt"
-  fi
-
-  # Install prefixed skills
-  for domain in code design writing efficiency build; do
-    for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
-      if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
-        agent_name="$(basename "${agent_dir}")"
-        link_or_copy "${agent_dir}" "${CLAUDE_DIR}/vxnt:${agent_name}"
+  if [ "${UNINSTALL}" = true ]; then
+    for skill_dir in "${ROOT_DIR}/skills"/*; do
+      if [ -d "${skill_dir}" ]; then
+        skill_name="$(basename "${skill_dir}")"
+        rm -rf "${CLAUDE_DIR}/${skill_name}"
+        echo "  [x] Removed ${CLAUDE_DIR}/${skill_name}"
       fi
     done
+    return 0
+  fi
+
+  # Install all skills from skills/
+  for skill_dir in "${ROOT_DIR}/skills"/*; do
+    if [ -d "${skill_dir}" ] && [ -f "${skill_dir}/SKILL.md" ]; then
+      skill_name="$(basename "${skill_dir}")"
+      link_or_copy "${skill_dir}" "${CLAUDE_DIR}/${skill_name}"
+    fi
   done
 
   # Subagent status note
-  echo "  [i] Note: Claude Code does not support background subagents. Task routing is governed by AGENTS.md / CLAUDE.md. Subagent daemon install skipped."
+  echo "  [i] Note: Claude Code does not support background subagents. Task routing is governed by AGENTS.md / CLAUDE.md."
 }
 
 strip_frontmatter() {
@@ -173,29 +204,31 @@ install_cursor() {
   echo "==> Configuring Cursor rules (${CURSOR_DIR})..."
   mkdir -p "${CURSOR_DIR}"
 
-  # Clean up legacy rules (both unprefixed and colon-named)
-  for legacy in code-review adversarial simplifier design-crit design-system empathy-a11y copy-editor steelman-skeptic narrative-architect; do
+  # Clean up legacy rules (unprefixed and old hyphenated)
+  for legacy in code-review adversarial simplifier design-crit design-system empathy-a11y copy-editor steelman-skeptic narrative-architect grill-spec domain-model task-graph implement handover token-economist; do
     rm -f "${CURSOR_DIR}/${legacy}.mdc"
   done
-  rm -f "${CURSOR_DIR}"/vxnt:*.mdc
+  for old_rule in "${CURSOR_DIR}"/vxnt-*.mdc "${CURSOR_DIR}"/vxnt.mdc; do
+    rm -f "${old_rule}"
+  done
+
+  if [ "${UNINSTALL}" = true ]; then
+    echo "  [x] Removed Cursor rules from ${CURSOR_DIR}"
+    return 0
+  fi
 
   # 1. Install dedicated Lead Agent rule
-  if [ -d "${ROOT_DIR}/agents/vxnt" ] && [ -f "${ROOT_DIR}/agents/vxnt/SKILL.md" ]; then
+  if [ -d "${ROOT_DIR}/skills/vxnt" ] && [ -f "${ROOT_DIR}/skills/vxnt/SKILL.md" ]; then
     local dest_rule="${CURSOR_DIR}/vxnt.mdc"
-    if [ "${UNINSTALL}" = true ]; then
-      rm -f "${dest_rule}"
-      echo "  [x] Removed ${dest_rule}"
-    else
-      cat << EOF > "${dest_rule}"
+    cat << EOF > "${dest_rule}"
 ---
 description: "VXNT Dedicated Lead Agent"
 globs: *
 alwaysApply: true
 ---
 EOF
-      strip_frontmatter "${ROOT_DIR}/agents/vxnt/SKILL.md" >> "${dest_rule}"
-      echo "  [✓] Generated: ${dest_rule}"
-    fi
+    strip_frontmatter "${ROOT_DIR}/skills/vxnt/SKILL.md" >> "${dest_rule}"
+    echo "  [✓] Generated: ${dest_rule}"
   fi
 
   # 2. Install Division Subagent rules (Cursor personas invokable via @vxnt-code, etc.)
@@ -204,46 +237,35 @@ EOF
       if [ -f "${subagent_file}" ]; then
         local subagent_name="$(basename "${subagent_file}" .md)"
         local dest_rule="${CURSOR_DIR}/${subagent_name}.mdc"
-        if [ "${UNINSTALL}" = true ]; then
-          rm -f "${dest_rule}"
-          echo "  [x] Removed ${dest_rule}"
-        else
-          cat << EOF > "${dest_rule}"
+        cat << EOF > "${dest_rule}"
 ---
 description: "VXNT Subagent Persona: @${subagent_name}"
 globs: *
 alwaysApply: false
 ---
 EOF
-          strip_frontmatter "${subagent_file}" >> "${dest_rule}"
-          echo "  [✓] Generated: ${dest_rule}"
-        fi
+        strip_frontmatter "${subagent_file}" >> "${dest_rule}"
+        echo "  [✓] Generated: ${dest_rule}"
       fi
     done
   fi
 
-  # 3. Install prefixed skill rules (cross-platform safe hyphens)
-  for domain in code design writing efficiency build; do
-    for agent_dir in "${ROOT_DIR}/agents/${domain}"/*; do
-      if [ -d "${agent_dir}" ] && [ -f "${agent_dir}/SKILL.md" ]; then
-        agent_name="$(basename "${agent_dir}")"
-        dest_rule="${CURSOR_DIR}/vxnt-${agent_name}.mdc"
-        if [ "${UNINSTALL}" = true ]; then
-          rm -f "${dest_rule}"
-          echo "  [x] Removed ${dest_rule}"
-        else
-          cat << EOF > "${dest_rule}"
+  # 3. Install skill rules (safe hyphen filenames e.g. vxnt-code-code-review.mdc)
+  for skill_dir in "${ROOT_DIR}/skills/vxnt:"*; do
+    if [ -d "${skill_dir}" ] && [ -f "${skill_dir}/SKILL.md" ]; then
+      skill_name="$(basename "${skill_dir}")"
+      rule_file_name="$(echo "${skill_name}" | tr ':' '-')"
+      dest_rule="${CURSOR_DIR}/${rule_file_name}.mdc"
+      cat << EOF > "${dest_rule}"
 ---
-description: "VXNT Skill: vxnt:${agent_name}"
+description: "VXNT Skill: ${skill_name}"
 globs: *
 alwaysApply: false
 ---
 EOF
-          strip_frontmatter "${agent_dir}/SKILL.md" >> "${dest_rule}"
-          echo "  [✓] Generated: ${dest_rule}"
-        fi
-      fi
-    done
+      strip_frontmatter "${skill_dir}/SKILL.md" >> "${dest_rule}"
+      echo "  [✓] Generated: ${dest_rule}"
+    fi
   done
 }
 

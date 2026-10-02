@@ -1,27 +1,27 @@
 # The Code Gauntlet Recipe
 
-> **Composite Multi-Agent Workflow:** `vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier`  
+> **Composite Multi-Agent Workflow:** `vxnt:code:code-review` ➔ `vxnt:code:adversarial` ➔ `vxnt:code:simplifier`  
 > **Target:** Code Diffs, Pull Requests, Architecture RFCs, or Critical Modules.
 
 ---
 
 ## Workflow Objective
 The Code Gauntlet subjects any codebase change to a three-tier gauntlet:
-1. **Tier 1 (`vxnt:code-review`):** Audits architecture, seams, cognitive readability, and error paths.
-2. **Tier 2 (`vxnt:adversarial`):** Attacks the reviewed code to expose race conditions, resource exhaustion, and security/input breaking points.
-3. **Tier 3 (`vxnt:simplifier`):** Strips away any defensive over-engineering or premature abstractions introduced during steps 1 & 2, delivering the leanest possible production code.
+1. **Tier 1 (`vxnt:code:code-review`):** Audits architecture, seams, cognitive readability, and error paths.
+2. **Tier 2 (`vxnt:code:adversarial`):** Attacks the reviewed code to expose race conditions, resource exhaustion, and security/input breaking points.
+3. **Tier 3 (`vxnt:code:simplifier`):** Strips away any defensive over-engineering or premature abstractions introduced during steps 1 & 2, delivering the leanest possible production code.
 
 ```mermaid
 flowchart LR
-    A["Input Code / Diff"] --> B["1. Code Reviewer (vxnt:code-review)"]
-    B -->|Seams & Architecture| C["2. Adversarial Red Team (vxnt:adversarial)"]
-    C -->|Failure Modes & Hardening| D["3. The Simplifier (vxnt:simplifier)"]
+    A["Input Code / Diff"] --> B["1. Code Reviewer (vxnt:code:code-review)"]
+    B -->|Seams & Architecture| C["2. Adversarial Red Team (vxnt:code:adversarial)"]
+    C -->|Failure Modes & Hardening| D["3. The Simplifier (vxnt:code:simplifier)"]
     D -->|YAGNI & Bloat Cut| E["Hardened & Minimal Code"]
 ```
 
 ---
 
-## Token Efficiency Directive (`vxnt:token-economist`)
+## Token Efficiency Directive (`vxnt:efficiency:token-economist`)
 > **Context Control:** Between passes, pass ONLY the diff and bulleted blocker fixes—never repeat raw tool outputs, package files, or full unchanged files.
 
 ---
@@ -29,25 +29,25 @@ flowchart LR
 ## Step-by-Step Invocation Protocol
 
 ### Step 1: Run Architectural Review
-Run the `vxnt:code-review` skill on the target file or diff:
+Run the `vxnt:code:code-review` skill on the target file or diff:
 ```
-/vxnt:code-review
+/vxnt:code:code-review
 <paste code diff or file path>
 ```
 *Goal:* Identify interface leaks, error handling gaps, and cognitive complexity. Note the `[BLOCKER]` and `[WARNING]` items.
 
 ### Step 2: Red Team the Proposed Patch
-Feed the code (including any fixes from Step 1) to `vxnt:adversarial`:
+Feed the code (including any fixes from Step 1) to `vxnt:code:adversarial`:
 ```
-/vxnt:adversarial
+/vxnt:code:adversarial
 <paste code with applied Step 1 fixes>
 ```
 *Goal:* Probe concurrency, edge-case inputs, failure cascades, and state corruption. Apply necessary guards.
 
 ### Step 3: Strip Defensive Bloat
-Feed the hardened code to `vxnt:simplifier`:
+Feed the hardened code to `vxnt:code:simplifier`:
 ```
-/vxnt:simplifier
+/vxnt:code:simplifier
 <paste hardened code>
 ```
 *Goal:* Ensure the hardening didn't invent 3 new layers of abstraction or introduce unnecessary third-party packages. Replace complex custom logic with native standard library methods.

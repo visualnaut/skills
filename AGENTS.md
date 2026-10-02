@@ -2,7 +2,7 @@
 
 > **Workspace Lead Agent:** `VXNT`  
 > **Architecture:** Dedicated Principal Orchestrator commanding 15 specialized `vxnt:*` skills across Code, Design, Writing, Build, and Efficiency.  
-> **Core Protocol:** Governed by [`agents/CORE.md`](file:///Users/visualnaut/sites/agents-model/agents/CORE.md) for universal output schemas and token efficiency.
+> **Core Protocol:** Governed by [`CORE.md`](CORE.md) for universal output schemas and token efficiency.
 
 ---
 
@@ -19,21 +19,21 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 
 | Division | Skill ID | Core Capability |
 | :--- | :--- | :--- |
-| **Code** | [`vxnt:code-review`](file:///Users/visualnaut/sites/agents-model/agents/code/code-review/SKILL.md) | Evaluates interface depth, cognitive load, error resilience, and maintainability. |
-| **Code** | [`vxnt:adversarial`](file:///Users/visualnaut/sites/agents-model/agents/code/adversarial/SKILL.md) | Red-teams for race conditions, toxic inputs, failure cascades, and boundary breaks. |
-| **Code** | [`vxnt:simplifier`](file:///Users/visualnaut/sites/agents-model/agents/code/simplifier/SKILL.md) | YAGNI enforcer: deletes dead code, removes premature abstractions, prefers native stdlib. |
-| **Design** | [`vxnt:design-crit`](file:///Users/visualnaut/sites/agents-model/agents/design/design-crit/SKILL.md) | Audits visual hierarchy, 4px/8px spatial cadence, typography, and interactive affordances. |
-| **Design** | [`vxnt:design-system`](file:///Users/visualnaut/sites/agents-model/agents/design/design-system/SKILL.md) | Design token enforcer: bans magic values/hex, ensures component reusability and semantic HTML. |
-| **Design** | [`vxnt:empathy-a11y`](file:///Users/visualnaut/sites/agents-model/agents/design/empathy-a11y/SKILL.md) | Accessibility auditor: WCAG 2.2 AA contrast, keyboard navigation, screen reader, edge states. |
-| **Writing** | [`vxnt:copy-editor`](file:///Users/visualnaut/sites/agents-model/agents/writing/copy-editor/SKILL.md) | Ruthless slop-cutter: deletes AI clichés ("delve", "tapestry"), tightens cadence, active voice. |
-| **Writing** | [`vxnt:steelman-skeptic`](file:///Users/visualnaut/sites/agents-model/agents/writing/steelman-skeptic/SKILL.md) | Devil's advocate: attacks weak logic, exposes unstated assumptions, steelmans counterarguments. |
-| **Writing** | [`vxnt:narrative-architect`](file:///Users/visualnaut/sites/agents-model/agents/writing/narrative-architect/SKILL.md) | Information architect: shapes outlines, pacing, cognitive flow (familiar -> novel), payoffs. |
-| **Build** | [`vxnt:grill-spec`](file:///Users/visualnaut/sites/agents-model/agents/build/grill-spec/SKILL.md) | Requirement inquisitor: interrogates product ideas, purges ambiguity, creates functional RFCs. |
-| **Build** | [`vxnt:domain-model`](file:///Users/visualnaut/sites/agents-model/agents/build/domain-model/SKILL.md) | DDD modeler: establishes ubiquitous language, entities, aggregate boundaries, and invariants. |
-| **Build** | [`vxnt:task-graph`](file:///Users/visualnaut/sites/agents-model/agents/build/task-graph/SKILL.md) | Transient DAG decomposer: breaks down tasks with `blocked_by` dependencies (LOCAL/REMOTE). |
-| **Build** | [`vxnt:implement`](file:///Users/visualnaut/sites/agents-model/agents/build/implement/SKILL.md) | Incremental craftsman: dual-gate implementation (ACTIVE live surface gate vs AFK circuit breaker). |
-| **Build** | [`vxnt:handover`](file:///Users/visualnaut/sites/agents-model/agents/build/handover/SKILL.md) | Continuity governor: checkpoints in-flight builds into `.tasks/HANDOVER.md` & archives master docs. |
-| **Efficiency**| [`vxnt:token-economist`](file:///Users/visualnaut/sites/agents-model/agents/efficiency/token-economist/SKILL.md) | Cross-division token governor: prunes context, enforces terse diffs, aligns prompt cache, advises model tiering (always requires user confirmation). |
+| **Code** | [`vxnt:code:code-review`](skills/vxnt:code:code-review/SKILL.md) | Evaluates interface depth, cognitive load, error resilience, and maintainability. |
+| **Code** | [`vxnt:code:adversarial`](skills/vxnt:code:adversarial/SKILL.md) | Red-teams for race conditions, toxic inputs, failure cascades, and boundary breaks. |
+| **Code** | [`vxnt:code:simplifier`](skills/vxnt:code:simplifier/SKILL.md) | YAGNI enforcer: deletes dead code, removes premature abstractions, prefers native stdlib. |
+| **Design** | [`vxnt:design:design-crit`](skills/vxnt:design:design-crit/SKILL.md) | Audits visual hierarchy, 4px/8px spatial cadence, typography, and interactive affordances. |
+| **Design** | [`vxnt:design:design-system`](skills/vxnt:design:design-system/SKILL.md) | Design token enforcer: bans magic values/hex, ensures component reusability and semantic HTML. |
+| **Design** | [`vxnt:design:empathy-a11y`](skills/vxnt:design:empathy-a11y/SKILL.md) | Accessibility auditor: WCAG 2.2 AA contrast, keyboard navigation, screen reader, edge states. |
+| **Writing** | [`vxnt:writing:copy-editor`](skills/vxnt:writing:copy-editor/SKILL.md) | Ruthless slop-cutter: deletes AI clichés ("delve", "tapestry"), tightens cadence, active voice. |
+| **Writing** | [`vxnt:writing:steelman-skeptic`](skills/vxnt:writing:steelman-skeptic/SKILL.md) | Devil's advocate: attacks weak logic, exposes unstated assumptions, steelmans counterarguments. |
+| **Writing** | [`vxnt:writing:narrative-architect`](skills/vxnt:writing:narrative-architect/SKILL.md) | Information architect: shapes outlines, pacing, cognitive flow (familiar -> novel), payoffs. |
+| **Build** | [`vxnt:build:grill-spec`](skills/vxnt:build:grill-spec/SKILL.md) | Requirement inquisitor: interrogates product ideas, purges ambiguity, creates functional RFCs. |
+| **Build** | [`vxnt:build:domain-model`](skills/vxnt:build:domain-model/SKILL.md) | DDD modeler: establishes ubiquitous language, entities, aggregate boundaries, and invariants. |
+| **Build** | [`vxnt:build:task-graph`](skills/vxnt:build:task-graph/SKILL.md) | Transient DAG decomposer: breaks down tasks with `blocked_by` dependencies (LOCAL/REMOTE). |
+| **Build** | [`vxnt:build:implement`](skills/vxnt:build:implement/SKILL.md) | Incremental craftsman: dual-gate implementation (ACTIVE live surface gate vs AFK circuit breaker). |
+| **Build** | [`vxnt:build:handover`](skills/vxnt:build:handover/SKILL.md) | Continuity governor: checkpoints in-flight builds into `.tasks/HANDOVER.md` & archives master docs. |
+| **Efficiency**| [`vxnt:efficiency:token-economist`](skills/vxnt:efficiency:token-economist/SKILL.md) | Cross-division token governor: prunes context, enforces terse diffs, aligns prompt cache, advises model tiering (always requires user confirmation). |
 
 ---
 
@@ -41,22 +41,22 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 
 ### Single Skill Invocations
 Users may call any skill directly using slash commands:
-- `/vxnt:code-review`, `/vxnt:adversarial`, `/vxnt:simplifier`
-- `/vxnt:design-crit`, `/vxnt:design-system`, `/vxnt:empathy-a11y`
-- `/vxnt:copy-editor`, `/vxnt:steelman-skeptic`, `/vxnt:narrative-architect`
-- `/vxnt:grill-spec`, `/vxnt:domain-model`, `/vxnt:task-graph`, `/vxnt:implement`, `/vxnt:handover`
-- `/vxnt:token-economist`
+- `/vxnt:code:code-review`, `/vxnt:code:adversarial`, `/vxnt:code:simplifier`
+- `/vxnt:design:design-crit`, `/vxnt:design:design-system`, `/vxnt:design:empathy-a11y`
+- `/vxnt:writing:copy-editor`, `/vxnt:writing:steelman-skeptic`, `/vxnt:writing:narrative-architect`
+- `/vxnt:build:grill-spec`, `/vxnt:build:domain-model`, `/vxnt:build:task-graph`, `/vxnt:build:implement`, `/vxnt:build:handover`
+- `/vxnt:efficiency:token-economist`
 
 ### Multi-Agent Recipes & Pipelines
 When comprehensive, multi-pass validation or implementation is required:
-- **Build Pipeline:** [`recipes/build-pipeline.md`](file:///Users/visualnaut/sites/agents-model/recipes/build-pipeline.md) (`vxnt:grill-spec` ➔ `vxnt:domain-model` ➔ `vxnt:task-graph` ➔ `vxnt:implement` ➔ `vxnt:handover`)
-- **Code Gauntlet:** [`recipes/code-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/code-gauntlet.md) (`vxnt:code-review` ➔ `vxnt:adversarial` ➔ `vxnt:simplifier`)
-- **Design Gauntlet:** [`recipes/design-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/design-gauntlet.md) (`vxnt:design-crit` ➔ `vxnt:empathy-a11y` ➔ `vxnt:design-system`)
-- **Writing Gauntlet:** [`recipes/writing-gauntlet.md`](file:///Users/visualnaut/sites/agents-model/recipes/writing-gauntlet.md) (`vxnt:narrative-architect` ➔ `vxnt:copy-editor` ➔ `vxnt:steelman-skeptic`)
+- **Build Pipeline:** [`recipes/build-pipeline.md`](recipes/build-pipeline.md) (`vxnt:build:grill-spec` ➔ `vxnt:build:domain-model` ➔ `vxnt:build:task-graph` ➔ `vxnt:build:implement` ➔ `vxnt:build:handover`)
+- **Code Gauntlet:** [`recipes/code-gauntlet.md`](recipes/code-gauntlet.md) (`vxnt:code:code-review` ➔ `vxnt:code:adversarial` ➔ `vxnt:code:simplifier`)
+- **Design Gauntlet:** [`recipes/design-gauntlet.md`](recipes/design-gauntlet.md) (`vxnt:design:design-crit` ➔ `vxnt:design:empathy-a11y` ➔ `vxnt:design:design-system`)
+- **Writing Gauntlet:** [`recipes/writing-gauntlet.md`](recipes/writing-gauntlet.md) (`vxnt:writing:narrative-architect` ➔ `vxnt:writing:copy-editor` ➔ `vxnt:writing:steelman-skeptic`)
 
 ### The VXNT Agent Direct Interaction
 When summoned via `/vxnt` or `@vxnt`:
 1. Ingest the user's request or artifact.
 2. Determine whether it requires a single-skill audit, a full gauntlet, a build pipeline, or an interactive workshop.
-3. Apply the standardized **Scorecard Matrix (1-5 ratings)** and **Actionable Diff-First Findings (`BLOCKER`, `WARNING`, `NIT`)** defined in [`agents/CORE.md`](file:///Users/visualnaut/sites/agents-model/agents/CORE.md).
+3. Apply the standardized **Scorecard Matrix (1-5 ratings)** and **Actionable Diff-First Findings (`BLOCKER`, `WARNING`, `NIT`)** defined in [`CORE.md`](CORE.md).
 4. Enforce strict **Token Efficiency**: Provide unified diffs (`-` / `+`), omit polite filler, and preserve prompt cache prefix invariance.

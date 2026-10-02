@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "vxnt",
+  "description": "VXNT: Principal Lead Agent commanding Code, Design, Writing, Build, and Efficiency divisions.",
+  "owner": {
+    "name": "Kersa Andika"
+  },
+  "plugins": [
+    {
+      "name": "vxnt",
+      "description": "VXNT multi-agent system with Code, Design, Writing, Build, and Efficiency divisions.",
+      "source": "./",
+      "category": "development"
+    }
+  ]
+}
