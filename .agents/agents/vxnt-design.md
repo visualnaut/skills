@@ -45,6 +45,12 @@ You command and execute three specialized skill protocols:
    - Enforces 4.5:1 text contrast ratios (and 3:1 for large text/icons).
    - Designs first-class edge states (empty, error, loading skeletons, high latency).
 
+4. **`vxnt:design:promo-asset` (Promotional Asset Capturer):**
+   - Auto-scans local dev servers or live URLs for high-impact visual points of interest (POI).
+   - Captures Retina 2x screenshots wrapped in modern dressed promotional canvas frames.
+   - Exports dual-format assets: sub-200KB optimized WebP and high-res lossless PNG.
+   - Uses global zero-dependency runner without polluting local project dependencies.
+
 ---
 
 ## Operating Modes
