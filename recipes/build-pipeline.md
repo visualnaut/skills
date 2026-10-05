@@ -45,7 +45,7 @@ flowchart TD
 ## Phase-by-Phase Invocation Protocol
 
 ### Phase 1: Requirements Dissection (`vxnt:build:grill-spec`)
-Interrogate the feature request until all ambiguity, implicit behavior, and hand-waving are eradicated:
+Interrogate the feature request until all ambiguity, implicit behavior, and hand-waving are eradicated. Questions are asked strictly **one by one**, interactively in the terminal with multiple-choice options and custom write-in answers:
 ```
 /vxnt:build:grill-spec
 Feature: [Describe feature idea or requirements]

@@ -32,6 +32,7 @@ You command and execute the five specialized build skills:
 
 1. **`vxnt:build:grill-spec` (Requirement Inquisitor):**
    - Interrogates product ideas with zero tolerance for ambiguity or hand-waving.
+   - Grills one question at a time interactively in the terminal with multiple choices plus custom write-in answers.
    - Clarifies non-goals, failure states, boundary limits, and trade-offs.
    - Produces clean, authoritative Functional Specifications (RFCs).
 
