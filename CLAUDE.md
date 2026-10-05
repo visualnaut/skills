@@ -30,6 +30,7 @@ Whenever this workspace is active, adopt the **VXNT Lead Agent** persona:
 | **Design** | [`vxnt:design:design-crit`](skills/vxnt:design:design-crit/SKILL.md) (`/vxnt:design:design-crit`, `/design-crit`) | Audits visual hierarchy, 4px/8px spatial cadence, typography, and interactive affordances. |
 | **Design** | [`vxnt:design:design-system`](skills/vxnt:design:design-system/SKILL.md) (`/vxnt:design:design-system`, `/design-system`) | Design token enforcer: bans magic values/hex, ensures component reusability and semantic HTML. |
 | **Design** | [`vxnt:design:empathy-a11y`](skills/vxnt:design:empathy-a11y/SKILL.md) (`/vxnt:design:empathy-a11y`, `/empathy-a11y`) | Accessibility auditor: WCAG 2.2 AA contrast, keyboard navigation, screen reader, edge states. |
+| **Design** | [`vxnt:design:promo-asset`](skills/vxnt:design:promo-asset/SKILL.md) (`/vxnt:design:promo-asset`, `/promo-asset`) | Captures Retina 2x POI screenshots and dressed marketing cards (WebP + PNG) with zero repo bloat. |
 | **Writing** | [`vxnt:writing:copy-editor`](skills/vxnt:writing:copy-editor/SKILL.md) (`/vxnt:writing:copy-editor`, `/copy-editor`) | Ruthless slop-cutter: deletes AI clichés ("delve", "tapestry"), tightens cadence, active voice. |
 | **Writing** | [`vxnt:writing:steelman-skeptic`](skills/vxnt:writing:steelman-skeptic/SKILL.md) (`/vxnt:writing:steelman-skeptic`, `/steelman-skeptic`) | Devil's advocate: attacks weak logic, exposes unstated assumptions, steelmans counterarguments. |
 | **Writing** | [`vxnt:writing:narrative-architect`](skills/vxnt:writing:narrative-architect/SKILL.md) (`/vxnt:writing:narrative-architect`, `/narrative-architect`) | Information architect: shapes outlines, pacing, cognitive flow (familiar -> novel), payoffs. |
@@ -42,6 +43,7 @@ Whenever this workspace is active, adopt the **VXNT Lead Agent** persona:
 - **Build Pipeline:** [`recipes/build-pipeline.md`](recipes/build-pipeline.md) (`vxnt:build:grill-spec` ➔ `vxnt:build:domain-model` ➔ `vxnt:build:task-graph` ➔ `vxnt:build:implement` ➔ `vxnt:build:handover`)
 - **Code Gauntlet:** [`recipes/code-gauntlet.md`](recipes/code-gauntlet.md) (`vxnt:code:code-review` ➔ `vxnt:code:adversarial` ➔ `vxnt:code:simplifier`)
 - **Design Gauntlet:** [`recipes/design-gauntlet.md`](recipes/design-gauntlet.md) (`vxnt:design:design-crit` ➔ `vxnt:design:empathy-a11y` ➔ `vxnt:design:design-system`)
+- **Promo Gauntlet:** [`recipes/promo-gauntlet.md`](recipes/promo-gauntlet.md) (`vxnt:design:promo-asset` ➔ `vxnt:writing:narrative-architect` ➔ `vxnt:writing:copy-editor` ➔ `vxnt:writing:steelman-skeptic`)
 - **Writing Gauntlet:** [`recipes/writing-gauntlet.md`](recipes/writing-gauntlet.md) (`vxnt:writing:narrative-architect` ➔ `vxnt:writing:copy-editor` ➔ `vxnt:writing:steelman-skeptic`)
 
 ---

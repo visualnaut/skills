@@ -1,7 +1,7 @@
 # AGENTS.md: Dedicated Agent & Skill System
 
 > **Workspace Lead Agent:** `VXNT`  
-> **Architecture:** Dedicated Principal Orchestrator commanding 15 specialized `vxnt:*` skills across Code, Design, Writing, Build, and Efficiency.  
+> **Architecture:** Dedicated Principal Orchestrator commanding 16 specialized `vxnt:*` skills across Code, Design, Writing, Build, and Efficiency.  
 > **Core Protocol:** Governed by [`CORE.md`](CORE.md) for universal output schemas and token efficiency.
 
 ---
@@ -25,6 +25,7 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 | **Design** | [`vxnt:design:design-crit`](skills/vxnt:design:design-crit/SKILL.md) | Audits visual hierarchy, 4px/8px spatial cadence, typography, and interactive affordances. |
 | **Design** | [`vxnt:design:design-system`](skills/vxnt:design:design-system/SKILL.md) | Design token enforcer: bans magic values/hex, ensures component reusability and semantic HTML. |
 | **Design** | [`vxnt:design:empathy-a11y`](skills/vxnt:design:empathy-a11y/SKILL.md) | Accessibility auditor: WCAG 2.2 AA contrast, keyboard navigation, screen reader, edge states. |
+| **Design** | [`vxnt:design:promo-asset`](skills/vxnt:design:promo-asset/SKILL.md) | Captures Retina 2x POI screenshots and dressed marketing cards (WebP + PNG) with zero repo bloat. |
 | **Writing** | [`vxnt:writing:copy-editor`](skills/vxnt:writing:copy-editor/SKILL.md) | Ruthless slop-cutter: deletes AI clichés ("delve", "tapestry"), tightens cadence, active voice. |
 | **Writing** | [`vxnt:writing:steelman-skeptic`](skills/vxnt:writing:steelman-skeptic/SKILL.md) | Devil's advocate: attacks weak logic, exposes unstated assumptions, steelmans counterarguments. |
 | **Writing** | [`vxnt:writing:narrative-architect`](skills/vxnt:writing:narrative-architect/SKILL.md) | Information architect: shapes outlines, pacing, cognitive flow (familiar -> novel), payoffs. |
@@ -42,7 +43,7 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 ### Single Skill Invocations
 Users may call any skill directly using slash commands:
 - `/vxnt:code:code-review`, `/vxnt:code:adversarial`, `/vxnt:code:simplifier`
-- `/vxnt:design:design-crit`, `/vxnt:design:design-system`, `/vxnt:design:empathy-a11y`
+- `/vxnt:design:design-crit`, `/vxnt:design:design-system`, `/vxnt:design:empathy-a11y`, `/vxnt:design:promo-asset`
 - `/vxnt:writing:copy-editor`, `/vxnt:writing:steelman-skeptic`, `/vxnt:writing:narrative-architect`
 - `/vxnt:build:grill-spec`, `/vxnt:build:domain-model`, `/vxnt:build:task-graph`, `/vxnt:build:implement`, `/vxnt:build:handover`
 - `/vxnt:efficiency:token-economist`
@@ -52,6 +53,7 @@ When comprehensive, multi-pass validation or implementation is required:
 - **Build Pipeline:** [`recipes/build-pipeline.md`](recipes/build-pipeline.md) (`vxnt:build:grill-spec` ➔ `vxnt:build:domain-model` ➔ `vxnt:build:task-graph` ➔ `vxnt:build:implement` ➔ `vxnt:build:handover`)
 - **Code Gauntlet:** [`recipes/code-gauntlet.md`](recipes/code-gauntlet.md) (`vxnt:code:code-review` ➔ `vxnt:code:adversarial` ➔ `vxnt:code:simplifier`)
 - **Design Gauntlet:** [`recipes/design-gauntlet.md`](recipes/design-gauntlet.md) (`vxnt:design:design-crit` ➔ `vxnt:design:empathy-a11y` ➔ `vxnt:design:design-system`)
+- **Promo Gauntlet:** [`recipes/promo-gauntlet.md`](recipes/promo-gauntlet.md) (`vxnt:design:promo-asset` ➔ `vxnt:writing:narrative-architect` ➔ `vxnt:writing:copy-editor` ➔ `vxnt:writing:steelman-skeptic`)
 - **Writing Gauntlet:** [`recipes/writing-gauntlet.md`](recipes/writing-gauntlet.md) (`vxnt:writing:narrative-architect` ➔ `vxnt:writing:copy-editor` ➔ `vxnt:writing:steelman-skeptic`)
 
 ### The VXNT Agent Direct Interaction

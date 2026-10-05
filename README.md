@@ -1,6 +1,6 @@
 # VXNT: Dedicated Workflow Agent & Skill System
 
-A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent), 4 specialized **Division Subagents**, and 15 skills prefixed with `vxnt:` across **Build**, **Code**, **Design**, **Writing**, and **Token Efficiency**.
+A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent), 4 specialized **Division Subagents**, and 16 skills prefixed with `vxnt:` across **Build**, **Code**, **Design**, **Writing**, and **Token Efficiency**.
 
 Runs natively in **Google Antigravity**, **Claude Code**, **Cursor**, **Windsurf**, or directly inside web chats and API wrappers (Claude, GPT-4o, Gemini, DeepSeek, Ollama).
 
@@ -36,6 +36,7 @@ flowchart TD
         DC["vxnt:design:design-crit"]
         DS["vxnt:design:design-system"]
         EA["vxnt:design:empathy-a11y"]
+        PA["vxnt:design:promo-asset"]
     end
     
     subgraph WritingDivision ["Writing Division"]
@@ -71,7 +72,7 @@ For task-specific delegation in harnesses that support subagents (e.g. Antigravi
 
 ---
 
-## 🧭 The 15 Linked Specialist Skills (`vxnt:*`)
+## 🧭 The 16 Linked Specialist Skills (`vxnt:*`)
 
 All skills follow the lean standard defined in [`CORE.md`](CORE.md) (~50% leaner, zero duplicate boilerplate):
 
@@ -88,6 +89,7 @@ All skills follow the lean standard defined in [`CORE.md`](CORE.md) (~50% leaner
 | **Design** | [`vxnt:design:design-crit`](skills/vxnt:design:design-crit/SKILL.md) | Visual & Interaction Critic | Visual hierarchy, 4px/8px rhythm, typography, affordances |
 | **Design** | [`vxnt:design:design-system`](skills/vxnt:design:design-system/SKILL.md) | Token & Component Hygiene Enforcer | Zero hardcoded values, component reusability, semantic HTML |
 | **Design** | [`vxnt:design:empathy-a11y`](skills/vxnt:design:empathy-a11y/SKILL.md) | Cognitive Strain & A11y Auditor | WCAG 2.2 AA/AAA, keyboard focus, screen readers, edge states |
+| **Design** | [`vxnt:design:promo-asset`](skills/vxnt:design:promo-asset/SKILL.md) | Promotional Asset Capturer | Retina 2x POI screenshots, dressed canvas framing, WebP+PNG |
 | **Writing** | [`vxnt:writing:copy-editor`](skills/vxnt:writing:copy-editor/SKILL.md) | Ruthless Slop-Cutter & Stylist | Purges AI clichés, active verbs, dynamic cadence, 30%+ cut |
 | **Writing** | [`vxnt:writing:steelman-skeptic`](skills/vxnt:writing:steelman-skeptic/SKILL.md) | Thesis Challenger & Logic Auditor | Exposes unstated assumptions, attacks weak logic, steelmans |
 | **Writing** | [`vxnt:writing:narrative-architect`](skills/vxnt:writing:narrative-architect/SKILL.md) | Information Architect & Pacing Strategist | Outlines, cognitive progression (familiar -> novel), payoffs |
@@ -121,10 +123,11 @@ Full recipes and single-prompt templates live in [`recipes/`](recipes/):
 | **Build Pipeline** | [`recipes/build-pipeline.md`](recipes/build-pipeline.md)<br>`vxnt:build:grill-spec` ➔ `vxnt:build:domain-model` ➔ `vxnt:build:task-graph` ➔ `vxnt:build:implement` ➔ `vxnt:build:handover` | Product ideas, new features, and end-to-end implementations | `/vxnt run build pipeline on feature-idea`<br>*(or ask `vxnt-build`)* |
 | **Code Gauntlet** | [`recipes/code-gauntlet.md`](recipes/code-gauntlet.md)<br>`vxnt:code:code-review` ➔ `vxnt:code:adversarial` ➔ `vxnt:code:simplifier` | Pull requests, critical backend modules, refactors | `/vxnt run code gauntlet on src/auth.ts`<br>*(or ask `vxnt-code`)* |
 | **Design Gauntlet** | [`recipes/design-gauntlet.md`](recipes/design-gauntlet.md)<br>`vxnt:design:design-crit` ➔ `vxnt:design:empathy-a11y` ➔ `vxnt:design:design-system` | New UI components, modals, responsive screens | `/vxnt run design gauntlet on components/Modal.tsx`<br>*(or ask `vxnt-design`)* |
+| **Promo Gauntlet** | [`recipes/promo-gauntlet.md`](recipes/promo-gauntlet.md)<br>`vxnt:design:promo-asset` ➔ `vxnt:writing:narrative-architect` ➔ `vxnt:writing:copy-editor` ➔ `vxnt:writing:steelman-skeptic` | Feature launches, social media showcases, Product Hunt | `/vxnt run promo gauntlet on http://localhost:3000`<br>*(or ask `vxnt-design`)* |
 | **Writing Gauntlet** | [`recipes/writing-gauntlet.md`](recipes/writing-gauntlet.md)<br>`vxnt:writing:narrative-architect` ➔ `vxnt:writing:copy-editor` ➔ `vxnt:writing:steelman-skeptic` | PRDs, RFCs, blog posts, strategic pitches | `/vxnt run writing gauntlet on docs/rfc.md`<br>*(or ask `vxnt-writing`)* |
 
 ### How to Run Recipes:
-1. **Interactive Lead Agent:** Mention `/vxnt run the <build|code|design|writing> pipeline on <target>`. VXNT will orchestrate the passes and synthesize findings.
+1. **Interactive Lead Agent:** Mention `/vxnt run the <build|code|design|promo|writing> pipeline on <target>`. VXNT will orchestrate the passes and synthesize findings.
 2. **Dedicated Division Subagent:** Tell `vxnt-build`, `vxnt-code`, `vxnt-design`, or `vxnt-writing` to run the recipe.
 3. **Step-by-Step Manual Execution:** Run the individual slash commands sequentially.
 4. **Single-Prompt Web LLMs:** Copy the pre-built `Automated Gauntlet / Pipeline Prompt` from the bottom of any recipe file into ChatGPT, Claude.ai, or Gemini Studio.

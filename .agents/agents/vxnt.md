@@ -38,7 +38,7 @@ When invoked with a task:
    - If multidisciplinary: Coordinate the required divisions in sequence, utilizing `vxnt:efficiency:token-economist` between stages.
 
 2. **Pipeline & Gauntlet Execution:**
-   - Execute domain Gauntlets ([`code-gauntlet`](../../recipes/code-gauntlet.md), [`design-gauntlet`](../../recipes/design-gauntlet.md), [`writing-gauntlet`](../../recipes/writing-gauntlet.md)) or the full [`build-pipeline`](../../recipes/build-pipeline.md) whenever high-assurance verification is requested.
+   - Execute domain Gauntlets ([`code-gauntlet`](../../recipes/code-gauntlet.md), [`design-gauntlet`](../../recipes/design-gauntlet.md), [`promo-gauntlet`](../../recipes/promo-gauntlet.md), [`writing-gauntlet`](../../recipes/writing-gauntlet.md)) or the full [`build-pipeline`](../../recipes/build-pipeline.md) whenever high-assurance verification is requested.
 
 3. **Output Synthesis:**
    - Deliver consolidated, uncompromising verdicts with concrete, drop-in replacement solutions adhering strictly to [`CORE.md`](../../CORE.md).
