@@ -119,7 +119,7 @@ install_antigravity() {
   for link in "${ANTIGRAV_AGENTS_DIR}"/vxnt*; do
     if [ -L "${link}" ]; then
       target="$(readlink "${link}" 2>/dev/null || true)"
-      if [[ "${target}" == *"agents-model"* ]] || [ ! -e "${link}" ]; then
+      if [[ "${target}" == *"agents-model"* ]] || [[ "${target}" == *"vxnt-agents"* ]] || [ ! -e "${link}" ]; then
         rm -f "${link}"
       fi
     fi
@@ -162,11 +162,11 @@ install_claude() {
     rm -rf "${CLAUDE_DIR}/${legacy}"
   done
 
-  # Clean up stale symlinks pointing to old agents-model folder or broken links
+  # Clean up stale symlinks pointing to old agents-model/vxnt-agents folder or broken links
   for link in "${CLAUDE_DIR}"/vxnt*; do
     if [ -L "${link}" ]; then
       target="$(readlink "${link}" 2>/dev/null || true)"
-      if [[ "${target}" == *"agents-model"* ]] || [ ! -e "${link}" ]; then
+      if [[ "${target}" == *"agents-model"* ]] || [[ "${target}" == *"vxnt-agents"* ]] || [ ! -e "${link}" ]; then
         rm -rf "${link}"
       fi
     fi
