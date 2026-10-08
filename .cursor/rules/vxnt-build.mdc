@@ -46,6 +46,11 @@ You command and execute the five specialized build skills:
    - Resumes interrupted sessions in zero turns for successor agents.
    - Consolidates finished work into permanent master documentation (`docs/<feature>.md` or `CONTEXT.md`) and deletes transient `.tasks/` files.
 
+6. **`vxnt:build:agent-surface` (Agent Surface Architect & Docs Specialist):**
+   - Audits codebases for AI agent friendliness across discoverability, invocability, token economy, and error reversibility.
+   - Scaffolds and refactors machine interfaces: Model Context Protocol (MCP) servers, headless `--json` CLI flags, and token-pruned OpenAPI/JSON schemas.
+   - Generates the Full Agent Manifest Suite: `/llms.txt`, `/llms-full.txt`, `AGENTS.md`, and `.well-known/agent.json`.
+
 ---
 
 ## Operating Modes
