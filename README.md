@@ -1,6 +1,6 @@
 # VXNT: Dedicated Workflow Agent & Skill System
 
-A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent), 4 specialized **Division Subagents**, and 16 skills prefixed with `vxnt:` across **Build**, **Code**, **Design**, **Writing**, and **Token Efficiency**.
+A model-agnostic, harness-agnostic system featuring **VXNT** (Dedicated Lead Agent), 4 specialized **Division Subagents**, and 18 skills prefixed with `vxnt:` across **Build**, **Code**, **Design**, **Writing**, and **Token Efficiency**.
 
 Runs natively in **Google Antigravity**, **Claude Code**, **Cursor**, **Windsurf**, or directly inside web chats and API wrappers (Claude, GPT-4o, Gemini, DeepSeek, Ollama).
 
@@ -24,6 +24,7 @@ flowchart TD
         TG["vxnt:build:task-graph"]
         IMP["vxnt:build:implement"]
         HO["vxnt:build:handover"]
+        AS["vxnt:build:agent-surface"]
     end
 
     subgraph CodeDivision ["Code Division"]
@@ -37,6 +38,7 @@ flowchart TD
         DS["vxnt:design:design-system"]
         EA["vxnt:design:empathy-a11y"]
         PA["vxnt:design:promo-asset"]
+        DR["vxnt:design:demo-record"]
     end
     
     subgraph WritingDivision ["Writing Division"]
@@ -72,7 +74,7 @@ For task-specific delegation in harnesses that support subagents (e.g. Antigravi
 
 ---
 
-## 🧭 The 16 Linked Specialist Skills (`vxnt:*`)
+## 🧭 The 18 Linked Specialist Skills (`vxnt:*`)
 
 All skills follow the lean standard defined in [`CORE.md`](CORE.md) (~50% leaner, zero duplicate boilerplate):
 
@@ -83,6 +85,7 @@ All skills follow the lean standard defined in [`CORE.md`](CORE.md) (~50% leaner
 | **Build** | [`vxnt:build:task-graph`](skills/vxnt:build:task-graph/SKILL.md) | Transient DAG Decomposer | Vertical slices, `blocked_by` graphs, LOCAL/REMOTE tracking |
 | **Build** | [`vxnt:build:implement`](skills/vxnt:build:implement/SKILL.md) | Incremental Craftsman | ACTIVE live surface gates vs AFK 3-strike circuit breaker |
 | **Build** | [`vxnt:build:handover`](skills/vxnt:build:handover/SKILL.md) | Continuity Governor & Archiver | `.tasks/HANDOVER.md` checkpoints, master doc archival & cleanup |
+| **Build** | [`vxnt:build:agent-surface`](skills/vxnt:build:agent-surface/SKILL.md) | Agent Surface Architect | Exposes features (MCP, `--json` CLI, OpenAPI), Full Agent Manifest Suite (`llms.txt`) |
 | **Code** | [`vxnt:code:code-review`](skills/vxnt:code:code-review/SKILL.md) | Architecture & Quality Gatekeeper | Module depth, seams, cognitive load, error resilience |
 | **Code** | [`vxnt:code:adversarial`](skills/vxnt:code:adversarial/SKILL.md) | Doubt-Driven Red Teamer | Concurrency, race conditions, toxic inputs, failure cascades |
 | **Code** | [`vxnt:code:simplifier`](skills/vxnt:code:simplifier/SKILL.md) | YAGNI & Bloat Eliminator | Dead code, premature abstractions, native stdlib leverage |
@@ -90,6 +93,7 @@ All skills follow the lean standard defined in [`CORE.md`](CORE.md) (~50% leaner
 | **Design** | [`vxnt:design:design-system`](skills/vxnt:design:design-system/SKILL.md) | Token & Component Hygiene Enforcer | Zero hardcoded values, component reusability, semantic HTML |
 | **Design** | [`vxnt:design:empathy-a11y`](skills/vxnt:design:empathy-a11y/SKILL.md) | Cognitive Strain & A11y Auditor | WCAG 2.2 AA/AAA, keyboard focus, screen readers, edge states |
 | **Design** | [`vxnt:design:promo-asset`](skills/vxnt:design:promo-asset/SKILL.md) | Promotional Asset Capturer | Retina 2x POI screenshots, dressed canvas framing, WebP+PNG |
+| **Design** | [`vxnt:design:demo-record`](skills/vxnt:design:demo-record/SKILL.md) | Interactive Demo Recorder | Virtual cursor walkthroughs, auto-templates, dual polished/raw MP4 export |
 | **Writing** | [`vxnt:writing:copy-editor`](skills/vxnt:writing:copy-editor/SKILL.md) | Ruthless Slop-Cutter & Stylist | Purges AI clichés, active verbs, dynamic cadence, 30%+ cut |
 | **Writing** | [`vxnt:writing:steelman-skeptic`](skills/vxnt:writing:steelman-skeptic/SKILL.md) | Thesis Challenger & Logic Auditor | Exposes unstated assumptions, attacks weak logic, steelmans |
 | **Writing** | [`vxnt:writing:narrative-architect`](skills/vxnt:writing:narrative-architect/SKILL.md) | Information Architect & Pacing Strategist | Outlines, cognitive progression (familiar -> novel), payoffs |

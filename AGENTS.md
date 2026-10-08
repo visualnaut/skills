@@ -1,7 +1,7 @@
 # AGENTS.md: Dedicated Agent & Skill System
 
 > **Workspace Lead Agent:** `VXNT`  
-> **Architecture:** Dedicated Principal Orchestrator commanding 16 specialized `vxnt:*` skills across Code, Design, Writing, Build, and Efficiency.  
+> **Architecture:** Dedicated Principal Orchestrator commanding 18 specialized `vxnt:*` skills across Code, Design, Writing, Build, and Efficiency.  
 > **Core Protocol:** Governed by [`CORE.md`](CORE.md) for universal output schemas and token efficiency.
 
 ---
@@ -26,6 +26,7 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 | **Design** | [`vxnt:design:design-system`](skills/vxnt:design:design-system/SKILL.md) | Design token enforcer: bans magic values/hex, ensures component reusability and semantic HTML. |
 | **Design** | [`vxnt:design:empathy-a11y`](skills/vxnt:design:empathy-a11y/SKILL.md) | Accessibility auditor: WCAG 2.2 AA contrast, keyboard navigation, screen reader, edge states. |
 | **Design** | [`vxnt:design:promo-asset`](skills/vxnt:design:promo-asset/SKILL.md) | Captures Retina 2x POI screenshots and dressed marketing cards (WebP + PNG) with zero repo bloat. |
+| **Design** | [`vxnt:design:demo-record`](skills/vxnt:design:demo-record/SKILL.md) | Records apps in motion with virtual cursor simulation, auto-templates, and dual polished/raw MP4 video export. |
 | **Writing** | [`vxnt:writing:copy-editor`](skills/vxnt:writing:copy-editor/SKILL.md) | Ruthless slop-cutter: deletes AI clichés ("delve", "tapestry"), tightens cadence, active voice. |
 | **Writing** | [`vxnt:writing:steelman-skeptic`](skills/vxnt:writing:steelman-skeptic/SKILL.md) | Devil's advocate: attacks weak logic, exposes unstated assumptions, steelmans counterarguments. |
 | **Writing** | [`vxnt:writing:narrative-architect`](skills/vxnt:writing:narrative-architect/SKILL.md) | Information architect: shapes outlines, pacing, cognitive flow (familiar -> novel), payoffs. |
@@ -34,6 +35,7 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 | **Build** | [`vxnt:build:task-graph`](skills/vxnt:build:task-graph/SKILL.md) | Transient DAG decomposer: breaks down tasks with `blocked_by` dependencies (LOCAL/REMOTE). |
 | **Build** | [`vxnt:build:implement`](skills/vxnt:build:implement/SKILL.md) | Incremental craftsman: dual-gate implementation (ACTIVE live surface gate vs AFK circuit breaker). |
 | **Build** | [`vxnt:build:handover`](skills/vxnt:build:handover/SKILL.md) | Continuity governor: checkpoints in-flight builds into `.tasks/HANDOVER.md` & archives master docs. |
+| **Build** | [`vxnt:build:agent-surface`](skills/vxnt:build:agent-surface/SKILL.md) | Agentic interface engineer: audits agent readiness, adds MCP/CLI surfaces, generates llms.txt & agent manifest. |
 | **Efficiency**| [`vxnt:efficiency:token-economist`](skills/vxnt:efficiency:token-economist/SKILL.md) | Cross-division token governor: prunes context, enforces terse diffs, aligns prompt cache, advises model tiering (always requires user confirmation). |
 
 ---
@@ -43,9 +45,9 @@ Whenever this workspace is active, or whenever `/vxnt`, `@vxnt`, or *"ask vxnt"*
 ### Single Skill Invocations
 Users may call any skill directly using slash commands:
 - `/vxnt:code:code-review`, `/vxnt:code:adversarial`, `/vxnt:code:simplifier`
-- `/vxnt:design:design-crit`, `/vxnt:design:design-system`, `/vxnt:design:empathy-a11y`, `/vxnt:design:promo-asset`
+- `/vxnt:design:design-crit`, `/vxnt:design:design-system`, `/vxnt:design:empathy-a11y`, `/vxnt:design:promo-asset`, `/vxnt:design:demo-record`
 - `/vxnt:writing:copy-editor`, `/vxnt:writing:steelman-skeptic`, `/vxnt:writing:narrative-architect`
-- `/vxnt:build:grill-spec`, `/vxnt:build:domain-model`, `/vxnt:build:task-graph`, `/vxnt:build:implement`, `/vxnt:build:handover`
+- `/vxnt:build:grill-spec`, `/vxnt:build:domain-model`, `/vxnt:build:task-graph`, `/vxnt:build:implement`, `/vxnt:build:handover`, `/vxnt:build:agent-surface`
 - `/vxnt:efficiency:token-economist`
 
 ### Multi-Agent Recipes & Pipelines
