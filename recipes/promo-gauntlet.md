@@ -9,7 +9,7 @@
 ## Workflow Objective
 
 The **Promo Gauntlet** pairs high-precision visual capture with sharp, unignorable promotional copy:
-1. **Phase 1: Visual Asset Generation (`vxnt:design:promo-asset`):** Automatically finds the best point of interest (POI), captures at Retina 2x resolution, applies dressed promotional framing, and exports compressed WebP + high-res PNG.
+1. **Phase 1: Visual Asset Generation (`vxnt:design:promo-asset`):** Spawns `vxnt-design` subagent to locate the point of interest (POI), enforce zero clipping, and export both polished marketing cards and raw unadorned Retina captures (WebP + PNG).
 2. **Phase 2: Narrative Hook & Angle (`vxnt:writing:narrative-architect`):** Dissects the captured feature, establishes target audience psychology, and builds the problem ➔ novelty ➔ payoff narrative arc.
 3. **Phase 3: Launch Suite Copywriting (`vxnt:writing:copy-editor`):** Drafts punchy, fluff-free copy for X/Twitter, LinkedIn, Product Hunt, and hero banners.
 4. **Phase 4: Skeptic Reality Check (`vxnt:writing:steelman-skeptic`):** Cross-examines marketing claims against what the screenshot actually proves, purging hyperbole and verifying credibility.
@@ -44,7 +44,7 @@ Preset: og (1200x630) | producthunt (1270x760) | square
 /vxnt:design:promo-asset --simulator
 Preset: og (1200x630) | square (1080x1080) | raw
 ```
-*Deliverable:* Retina 2x dressed WebP (<200KB) and high-res PNG saved to `./assets/promo/`.
+*Deliverable:* Dual export: Polished Retina 2x WebP (<200KB) + master PNG, and unclipped Raw Retina 2x WebP/PNG saved to `./assets/promo/`.
 
 ### Phase 2: Narrative Hook & Positioning (`vxnt:writing:narrative-architect`)
 Analyze the visual asset and formulate the core angle:

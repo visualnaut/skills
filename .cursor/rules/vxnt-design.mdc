@@ -36,10 +36,10 @@ You command and execute three specialized skill protocols:
    - Designs first-class edge states (empty, error, loading skeletons, high latency).
 
 4. **`vxnt:design:promo-asset` (Promotional Asset Capturer):**
-   - Auto-scans local dev servers or live URLs for high-impact visual points of interest (POI).
-   - Captures Retina 2x screenshots wrapped in modern dressed promotional canvas frames.
-   - Exports dual-format assets: sub-200KB optimized WebP and high-res lossless PNG.
-   - Uses global zero-dependency runner without polluting local project dependencies.
+   - Spawns autonomously to execute browser captures without bloating parent orchestrator context.
+   - Enforces a strict Zero-Clipping Hard Rule: centers elements, dynamically expands viewport, and guarantees full containment.
+   - Always generates dual outputs: both polished studio-dressed cards and raw unadorned Retina captures (WebP + PNG).
+   - Uses global zero-dependency runner (`capture.js`) with Xcode Simulator and local dev port detection.
 
 ---
 

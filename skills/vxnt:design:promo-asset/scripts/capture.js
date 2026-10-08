@@ -121,10 +121,14 @@ function parseArgs() {
     outDir: './assets/promo',
     name: 'promo-shot',
     raw: false,
+    rawOnly: false,
     dpr: 2,
     quality: 90,
     timeout: 30000,
-    waitFor: 1000
+    waitFor: 1000,
+    viewport: '1440x900',
+    click: '',
+    eval: ''
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -138,17 +142,21 @@ function parseArgs() {
     else if (arg === '--theme' && args[i + 1]) config.theme = args[++i];
     else if (arg === '--out' && args[i + 1]) config.outDir = args[++i];
     else if (arg === '--name' && args[i + 1]) config.name = args[++i];
-    else if (arg === '--raw') config.raw = true;
+    else if (arg === '--raw-only') config.rawOnly = true;
+    else if (arg === '--raw') config.preset = 'raw';
     else if (arg === '--dpr' && args[i + 1]) config.dpr = parseFloat(args[++i]);
     else if (arg === '--quality' && args[i + 1]) config.quality = parseInt(args[++i], 10);
     else if (arg === '--wait' && args[i + 1]) config.waitFor = parseInt(args[++i], 10);
+    else if (arg === '--viewport' && args[i + 1]) config.viewport = args[++i];
+    else if (arg === '--click' && args[i + 1]) config.click = args[++i];
+    else if (arg === '--eval' && args[i + 1]) config.eval = args[++i];
     else if (arg === '-h' || arg === '--help') {
       printHelp();
       process.exit(0);
     }
   }
 
-  if (config.preset === 'raw') config.raw = true;
+  if (config.preset === 'raw') config.rawOnly = true;
   return config;
 }
 
@@ -208,9 +216,13 @@ async function main() {
   // Ensure output directory exists
   fs.mkdirSync(config.outDir, { recursive: true });
 
-  const baseName = `${config.name}-${config.preset}`;
-  const pngPath = path.join(config.outDir, `${baseName}.png`);
-  const webpPath = path.join(config.outDir, `${baseName}.webp`);
+  const polishedBase = `${config.name}-${config.preset}`;
+  const polishedPngPath = path.join(config.outDir, `${polishedBase}.png`);
+  const polishedWebpPath = path.join(config.outDir, `${polishedBase}.webp`);
+
+  const rawBase = `${config.name}-raw`;
+  const rawPngPath = path.join(config.outDir, `${rawBase}.png`);
+  const rawWebpPath = path.join(config.outDir, `${rawBase}.webp`);
 
   let canvasSize = { width: 1200, height: 630 };
   if (config.preset === 'producthunt') canvasSize = { width: 1270, height: 760 };
@@ -260,8 +272,18 @@ async function main() {
 
     console.log(`==> Launching Headless Chromium (DPR: ${config.dpr})...`);
     const browser = await pw.chromium.launch({ headless: true });
+    let vpWidth = 1440;
+    let vpHeight = 900;
+    if (config.viewport && config.viewport.includes('x')) {
+      const parts = config.viewport.split('x').map(Number);
+      if (parts[0] && parts[1]) {
+        vpWidth = parts[0];
+        vpHeight = parts[1];
+      }
+    }
+
     const context = await browser.newContext({
-      viewport: { width: 1280, height: 800 },
+      viewport: { width: vpWidth, height: vpHeight },
       deviceScaleFactor: config.dpr,
       colorScheme: 'dark'
     });
@@ -269,10 +291,31 @@ async function main() {
     const page = await context.newPage();
     console.log(`==> Navigating to ${targetUrl}...`);
     try {
-      await page.goto(targetUrl, { waitUntil: 'networkidle', timeout: config.timeout });
+      await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: config.timeout });
     } catch (_) {
-      console.log('  [!] Networkidle timed out, proceeding with domcontentloaded...');
-      await page.waitForLoadState('domcontentloaded');
+      console.log('  [!] Navigation timed out...');
+    }
+
+    if (config.click) {
+      console.log(`==> Clicking element matching: ${config.click}...`);
+      const clickEl = page.locator(config.click).first();
+      await clickEl.click();
+    }
+
+    if (config.eval) {
+      console.log(`==> Evaluating script in page context...`);
+      let codeToEval = config.eval;
+      if (codeToEval.startsWith('base64:')) {
+        codeToEval = Buffer.from(codeToEval.slice(7), 'base64').toString('utf8');
+      }
+      await page.evaluate((fnBody) => {
+        try {
+          const fn = new Function(fnBody);
+          return fn();
+        } catch (e) {
+          console.error('Eval error in page:', e.message);
+        }
+      }, codeToEval);
     }
 
     if (config.waitFor > 0) {
@@ -321,6 +364,27 @@ async function main() {
     if (targetSelector) {
       const el = await page.$(targetSelector);
       if (el) {
+        // Hard Rule: Zero-clipping guarantee
+        // 1. Scroll element into view with centering so margins and shadows aren't cut off
+        await page.evaluate((sel) => {
+          const element = document.querySelector(sel);
+          if (element) {
+            element.scrollIntoView({ behavior: 'instant', block: 'center', inline: 'center' });
+          }
+        }, targetSelector);
+
+        // 2. Inspect element bounding box and adjust viewport if element is larger than current viewport
+        const box = await el.boundingBox();
+        if (box) {
+          const neededWidth = Math.max(vpWidth, Math.ceil(box.x + box.width + 80));
+          const neededHeight = Math.max(vpHeight, Math.ceil(box.y + box.height + 80));
+          if (neededWidth > vpWidth || neededHeight > vpHeight) {
+            console.log(`  [i] Expanding viewport to ${neededWidth}x${neededHeight} to prevent element clipping...`);
+            await page.setViewportSize({ width: neededWidth, height: neededHeight });
+            await page.waitForTimeout(200);
+          }
+        }
+
         const buf = await el.screenshot({ type: 'png' });
         rawShotBase64 = buf.toString('base64');
       }
@@ -334,7 +398,7 @@ async function main() {
   }
 
   // ----------------------------------------------------
-  // RENDER & EXPORT (Raw or Studio Dressed)
+  // RENDER & EXPORT (Always Generate Both Raw and Polished)
   // ----------------------------------------------------
   const browser = await pw.chromium.launch({ headless: true });
   const studioContext = await browser.newContext({
@@ -343,23 +407,31 @@ async function main() {
   });
   const studioPage = await studioContext.newPage();
 
-  if (config.raw) {
-    console.log(`==> Saving raw Retina capture (WebP + PNG)...`);
-    const rawBuf = Buffer.from(rawShotBase64, 'base64');
-    fs.writeFileSync(pngPath, rawBuf);
+  // 1. ALWAYS emit unadorned Raw Retina assets (WebP + PNG)
+  console.log(`==> Saving raw Retina capture (WebP + PNG)...`);
+  const rawBuf = Buffer.from(rawShotBase64, 'base64');
+  fs.writeFileSync(rawPngPath, rawBuf);
 
-    // Convert to WebP via browser rendering
-    await studioPage.setContent(`
-      <!DOCTYPE html>
-      <html>
-      <body style="margin:0;padding:0;background:transparent;display:inline-block;">
-        <img id="raw-img" src="data:image/png;base64,${rawShotBase64}" style="display:block;" />
-      </body>
-      </html>
-    `);
-    const imgEl = await studioPage.$('#raw-img');
-    await imgEl.screenshot({ path: webpPath, type: 'webp', quality: config.quality });
-  } else {
+  await studioPage.setContent(`
+    <!DOCTYPE html>
+    <html>
+    <body style="margin:0;padding:0;background:transparent;display:inline-block;">
+      <img id="raw-img" src="data:image/png;base64,${rawShotBase64}" style="display:block;" />
+    </body>
+    </html>
+  `);
+  const imgEl = await studioPage.$('#raw-img');
+  await imgEl.screenshot({ path: rawWebpPath, type: 'webp', quality: config.quality });
+
+  const rawPngSize = (fs.statSync(rawPngPath).size / 1024).toFixed(1);
+  const rawWebpSize = (fs.statSync(rawWebpPath).size / 1024).toFixed(1);
+
+  // 2. ALWAYS emit Dressed Promotional Card (unless explicitly requested --raw-only)
+  let polishedGenerated = false;
+  let polPngSize = '0';
+  let polWebpSize = '0';
+
+  if (!config.rawOnly) {
     console.log(`==> Rendering dressed promotional card (${canvasSize.width}x${canvasSize.height}, preset: ${config.preset})...`);
 
     const themes = {
@@ -413,10 +485,10 @@ async function main() {
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           }
-          /* Desktop Frame */
+          /* Desktop Frame - Guaranteed Non-Clipping */
           .window-wrapper {
             width: 88%;
-            max-height: 82%;
+            height: 82%;
             background: #18181b;
             border-radius: 12px;
             box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -437,10 +509,25 @@ async function main() {
           .dot-red { background: #ef4444; }
           .dot-yellow { background: #f59e0b; }
           .dot-green { background: #10b981; }
-          .window-body { flex: 1; overflow: hidden; display: flex; background: #09090b; }
-          .window-body img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+          .window-body {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #09090b;
+          }
+          .window-body img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+          }
 
-          /* Mobile Phone Frame */
+          /* Mobile Phone Frame - Guaranteed Non-Clipping */
           .phone-wrapper {
             height: 88%;
             aspect-ratio: 9 / 19.5;
@@ -463,8 +550,20 @@ async function main() {
             border-radius: 20px;
             z-index: 10;
           }
-          .phone-body { width: 100%; height: 100%; overflow: hidden; display: flex; }
-          .phone-body img { width: 100%; height: 100%; object-fit: cover; display: block; }
+          .phone-body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .phone-body img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+          }
         </style>
       </head>
       <body>
@@ -475,33 +574,44 @@ async function main() {
 
     await studioPage.setViewportSize({ width: canvasSize.width, height: canvasSize.height });
     await studioPage.setContent(canvasHtml);
-    await studioPage.screenshot({ path: pngPath, type: 'png' });
-    await studioPage.screenshot({ path: webpPath, type: 'webp', quality: config.quality });
+    await studioPage.screenshot({ path: polishedPngPath, type: 'png' });
+    await studioPage.screenshot({ path: polishedWebpPath, type: 'webp', quality: config.quality });
+    polishedGenerated = true;
+    polPngSize = (fs.statSync(polishedPngPath).size / 1024).toFixed(1);
+    polWebpSize = (fs.statSync(polishedWebpPath).size / 1024).toFixed(1);
   }
 
   await browser.close();
 
-  const pngSize = (fs.statSync(pngPath).size / 1024).toFixed(1);
-  const webpSize = (fs.statSync(webpPath).size / 1024).toFixed(1);
-
   console.log('\n==> [✓] Promotional Assets Successfully Created:');
   console.log(`  - Source:           ${targetSource}`);
-  console.log(`  - Format Preset:    ${config.preset.toUpperCase()} (${config.raw ? 'Raw Crop' : `${canvasSize.width}x${canvasSize.height}`})`);
   console.log(`  - Device Mode:      ${isMobileDevice ? 'Mobile Phone' : 'Desktop / Web'}`);
-  console.log(`  - WebP (Retina 2x): ${webpPath} (${webpSize} KB) [Optimized]`);
-  console.log(`  - PNG  (Retina 2x): ${pngPath} (${pngSize} KB) [Lossless]`);
+  console.log(`  - Raw WebP (2x):    ${rawWebpPath} (${rawWebpSize} KB)`);
+  console.log(`  - Raw PNG  (2x):    ${rawPngPath} (${rawPngSize} KB)`);
+
+  const resultAssets = {
+    raw: {
+      webp: { path: rawWebpPath, sizeKb: parseFloat(rawWebpSize) },
+      png: { path: rawPngPath, sizeKb: parseFloat(rawPngSize) }
+    }
+  };
+
+  if (polishedGenerated) {
+    console.log(`  - Polished WebP:    ${polishedWebpPath} (${polWebpSize} KB) [Preset: ${config.preset.toUpperCase()}]`);
+    console.log(`  - Polished PNG:     ${polishedPngPath} (${polPngSize} KB)`);
+    resultAssets.polished = {
+      preset: config.preset,
+      webp: { path: polishedWebpPath, sizeKb: parseFloat(polWebpSize) },
+      png: { path: polishedPngPath, sizeKb: parseFloat(polPngSize) }
+    };
+  }
 
   const resultJson = {
     status: 'SUCCESS',
     source: targetSource,
     isMobile: isMobileDevice,
-    preset: config.preset,
-    raw: config.raw,
     dpr: config.dpr,
-    assets: {
-      webp: { path: webpPath, sizeKb: parseFloat(webpSize) },
-      png: { path: pngPath, sizeKb: parseFloat(pngSize) }
-    }
+    assets: resultAssets
   };
 
   console.log('\n--- JSON RESULT ---');
