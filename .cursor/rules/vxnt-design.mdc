@@ -41,6 +41,12 @@ You command and execute three specialized skill protocols:
    - Always generates dual outputs: both polished studio-dressed cards and raw unadorned Retina captures (WebP + PNG).
    - Uses global zero-dependency runner (`capture.js`) with Xcode Simulator and local dev port detection.
 
+5. **`vxnt:design:demo-record` (Interactive Demo Recorder):**
+   - Records web applications in motion with smooth virtual cursor simulation and click ripples.
+   - Offers pre-built auto-templates (`hero-tour`, `form-flow`, `tab-switch`, `looping-hover`) and custom action step JSON.
+   - Enforces fail-fast pre-flight checks on `ffmpeg` before launching headless instances.
+   - Emits dual outputs: polished framed video and raw UI in high-compatibility MP4 (H.264), skipping GIF bloat entirely.
+
 ---
 
 ## Operating Modes
